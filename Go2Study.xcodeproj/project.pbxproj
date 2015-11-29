@@ -16,6 +16,7 @@
 		75DF365A1C0B91F500A9B5E6 /* Go2StudyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF36591C0B91F500A9B5E6 /* Go2StudyUITests.swift */; };
 		75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */; };
 		75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */; };
+		75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		75DF365B1C0B91F500A9B5E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysOAuthViewController.swift; sourceTree = "<group>"; };
 		75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysClient.swift; sourceTree = "<group>"; };
+		75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */,
+				75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */,
 				75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */,
 				75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */,
+				75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

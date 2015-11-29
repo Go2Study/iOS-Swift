@@ -26,9 +26,9 @@ class FontysClient {
         }
     }
     
-    var accessToken: String {
+    var accessToken: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().valueForKey("fhictAccessToken") as! String
+            return NSUserDefaults.standardUserDefaults().valueForKey("fhictAccessToken") as? String
         }
         set {
             NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "fhictAccessToken")
