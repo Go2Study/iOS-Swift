@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */; };
-		75DF36391C0B91F500A9B5E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF36381C0B91F500A9B5E6 /* ViewController.swift */; };
 		75DF363C1C0B91F500A9B5E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75DF363A1C0B91F500A9B5E6 /* Main.storyboard */; };
 		75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75DF363D1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld */; };
 		75DF36411C0B91F500A9B5E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75DF36401C0B91F500A9B5E6 /* Assets.xcassets */; };
 		75DF36441C0B91F500A9B5E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75DF36421C0B91F500A9B5E6 /* LaunchScreen.storyboard */; };
 		75DF364F1C0B91F500A9B5E6 /* Go2StudyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF364E1C0B91F500A9B5E6 /* Go2StudyTests.swift */; };
 		75DF365A1C0B91F500A9B5E6 /* Go2StudyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF36591C0B91F500A9B5E6 /* Go2StudyUITests.swift */; };
+		75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */; };
+		75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,6 @@
 /* Begin PBXFileReference section */
 		75DF36331C0B91F400A9B5E6 /* Go2Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Go2Study.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		75DF36381C0B91F500A9B5E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		75DF363B1C0B91F500A9B5E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		75DF363E1C0B91F500A9B5E6 /* Go2Study.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Go2Study.xcdatamodel; sourceTree = "<group>"; };
 		75DF36401C0B91F500A9B5E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +49,8 @@
 		75DF36551C0B91F500A9B5E6 /* Go2StudyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Go2StudyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75DF36591C0B91F500A9B5E6 /* Go2StudyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Go2StudyUITests.swift; sourceTree = "<group>"; };
 		75DF365B1C0B91F500A9B5E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysOAuthViewController.swift; sourceTree = "<group>"; };
+		75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +101,9 @@
 		75DF36351C0B91F400A9B5E6 /* Go2Study */ = {
 			isa = PBXGroup;
 			children = (
+				75E8D9AA1C0B92AB009B5E7B /* Controllers */,
+				75E8D9AD1C0B941B009B5E7B /* Services */,
 				75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */,
-				75DF36381C0B91F500A9B5E6 /* ViewController.swift */,
 				75DF363A1C0B91F500A9B5E6 /* Main.storyboard */,
 				75DF36401C0B91F500A9B5E6 /* Assets.xcassets */,
 				75DF36421C0B91F500A9B5E6 /* LaunchScreen.storyboard */,
@@ -126,6 +129,22 @@
 				75DF365B1C0B91F500A9B5E6 /* Info.plist */,
 			);
 			path = Go2StudyUITests;
+			sourceTree = "<group>";
+		};
+		75E8D9AA1C0B92AB009B5E7B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		75E8D9AD1C0B941B009B5E7B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +281,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75DF36391C0B91F500A9B5E6 /* ViewController.swift in Sources */,
 				75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */,
+				75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */,
 				75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */,
+				75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +426,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Go2Study/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lol.go2study.Go2Study;
@@ -417,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Go2Study/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lol.go2study.Go2Study;
@@ -491,6 +513,7 @@
 				75DF36601C0B91F500A9B5E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75DF36611C0B91F500A9B5E6 /* Build configuration list for PBXNativeTarget "Go2StudyTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +522,7 @@
 				75DF36631C0B91F500A9B5E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75DF36641C0B91F500A9B5E6 /* Build configuration list for PBXNativeTarget "Go2StudyUITests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +531,7 @@
 				75DF36661C0B91F500A9B5E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

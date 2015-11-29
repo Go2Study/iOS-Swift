@@ -43,6 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        if url.scheme == "go2study" {
+            FontysClient().saveAccessToken(url)
+            return true
+        }
+        
+        return false
+    }
 
     // MARK: - Core Data stack
 
