@@ -154,10 +154,14 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
+        
         if segue.identifier == "peopleShowStaff" && currentDisplay == .Staff {
-            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let personStaffViewController = segue.destinationViewController as! PersonStaffTableViewController
             personStaffViewController.user = staffFetchedResultsController.objectAtIndexPath(indexPath) as? User
+        } else if segue.identifier == "peopleShowStudent" && currentDisplay == .Students {
+            let personStudentViewController = segue.destinationViewController as! PersonStudentTableViewController
+            personStudentViewController.user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as? User
         }
     }
     
@@ -278,7 +282,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             user.lastName    = userDictionary["lastName"].stringValue
             user.displayName = userDictionary["displayName"].stringValue
             user.mail        = userDictionary["email"].stringValue
-            user.pcn         = userDictionary["id"].stringValue
+            user.pcn         = userDictionary["pcn"].stringValue
             user.type        = "student"
             
             do {
