@@ -52,6 +52,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     // MARK: - UIViewController
     
     override func viewDidLoad() {
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         fontysClient.delegate = self
         reloadData()
     }
