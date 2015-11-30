@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import SwiftyJSON
 
-class PeopleTableViewController: UITableViewController, FontysClientDelegate {
+class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2SClientDelegate {
 
     enum displayOptions {
         case Students
@@ -24,6 +24,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     @IBOutlet weak var buttonCreateGroup: UIBarButtonItem!
     
     var fontysClient = FontysClient()
+    var g2sClient = G2SClient()
     var currentDisplay = displayOptions.Staff
     
     lazy var managedObjectContext: NSManagedObjectContext = {
@@ -36,7 +37,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     
     lazy var studentsFetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest.init(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "type == %@", "students")
+        fetchRequest.predicate = NSPredicate(format: "type == %@", "student")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "displayName", ascending: true)]
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
@@ -54,6 +55,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        g2sClient.delegate = self
         fontysClient.delegate = self
         reloadData()
     }
@@ -77,11 +79,9 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     }
     
     @IBAction func buttonRefreshTouched(sender: UIBarButtonItem) {
-        print("reloading...")
-        
         switch currentDisplay {
         case .Students:
-            break
+            g2sClient.getUsers()
         case .Staff:
             fontysClient.getUsers()
         case .Groups:
@@ -189,7 +189,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
         
         switch currentDisplay {
         case .Students:
-            fetchRequest.predicate = NSPredicate(format: "type == %@", "students")
+            fetchRequest.predicate = NSPredicate(format: "type == %@", "student")
         case .Staff:
             fetchRequest.predicate = NSPredicate(format: "type == %@", "staff")
         case .Groups:
@@ -257,5 +257,38 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
             let nserror = error as NSError
             print("User fetch error \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    
+    // MARK: - G2SClientDelegate
+    
+    func g2sClient(client: G2SClient, didFailWithError error: NSError) {
+        print("Request error \(error), \(error.userInfo)")
+    }
+    
+    func g2sClient(client: G2SClient, didGetUsersData data: NSData?) {
+        if (data != nil) {
+            deleteUserData()
+        }
+        
+        for (_, userDictionary) in JSON(data: data!) {
+            let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
+            
+            user.firstName   = userDictionary["firstName"].stringValue
+            user.lastName    = userDictionary["lastName"].stringValue
+            user.displayName = userDictionary["displayName"].stringValue
+            user.mail        = userDictionary["email"].stringValue
+            user.pcn         = userDictionary["id"].stringValue
+            user.type        = "student"
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                let nserror = error as NSError
+                print("Save error \(nserror), \(nserror.userInfo)")
+            }
+        }
+        
+        reloadData()
     }
 }
