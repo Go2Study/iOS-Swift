@@ -7,9 +7,231 @@
 //
 
 import UIKit
+import CoreData
+import SwiftyJSON
 
-class PeopleTableViewController: UITableViewController {
+class PeopleTableViewController: UITableViewController, FontysClientDelegate {
 
+    enum displayOptions {
+        case Students
+        case Staff
+        case Groups
+    }
     
+    
+    // MARK: - Properties
+    
+    @IBOutlet weak var buttonCreateGroup: UIBarButtonItem!
+    
+    var fontysClient = FontysClient()
+    var currentDisplay = displayOptions.Staff
+    
+    lazy var managedObjectContext: NSManagedObjectContext = {
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    }()
+    
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).persistentStoreCoordinator
+    }()
+    
+    lazy var studentsFetchedResultsController: NSFetchedResultsController = {
+        let fetchRequest = NSFetchRequest.init(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "type == %@", "students")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "displayName", ascending: true)]
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+    }()
+    
+    lazy var staffFetchedResultsController: NSFetchedResultsController = {
+        let fetchRequest = NSFetchRequest.init(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "type == %@", "staff")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "displayName", ascending: true)]
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+    }()
+    
+    
+    // MARK: - UIViewController
+    
+    override func viewDidLoad() {
+        fontysClient.delegate = self
+        reloadData()
+    }
+    
+    
+    // MARK: - Actions
+    
+    @IBAction func segmentedControlChanged(sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 { // students
+            currentDisplay = .Students
+            buttonCreateGroup.enabled = false
+        } else if sender.selectedSegmentIndex == 1 { // staff
+            currentDisplay = .Staff
+            buttonCreateGroup.enabled = false
+        } else if sender.selectedSegmentIndex == 2 { // groups
+            currentDisplay = .Groups
+            buttonCreateGroup.enabled = true
+        }
+        
+        reloadData()
+    }
+    
+    @IBAction func buttonRefreshTouched(sender: UIBarButtonItem) {
+        switch currentDisplay {
+        case .Students:
+            break
+        case .Staff:
+            fontysClient.getUsers()
+        case .Groups:
+            break
+        }
+        
+        reloadData()
+    }
+    
+    @IBAction func buttonAddGroupTouched(sender: UIBarButtonItem) {
+        
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch currentDisplay {
+        case .Students:
+            if studentsFetchedResultsController.sections?.count > 0 {
+                return studentsFetchedResultsController.sections![section].numberOfObjects
+            }
+        case .Staff:
+            if staffFetchedResultsController.sections?.count > 0 {
+                return staffFetchedResultsController.sections![section].numberOfObjects
+            }
+        case .Groups:
+            break
+        }
+        
+        return 0
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell") as! PeopleStaffTableViewCell
+        
+        switch currentDisplay {
+        case .Students :
+            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell") as! PeopleStudentTableViewCell
+            let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as! User
+            cell.name.text = user.displayName
+            cell.photo.image = nil
+            return cell
+            
+        case .Staff:
+            
+            let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
+            cell.name.text = user.displayName
+            cell.office.text = user.office
+            cell.photo.image = nil
+            return cell
+            
+        case .Groups:
+            break
+        }
+        
+        return cell
+    }
+    
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "peopleShowStaff" && currentDisplay == .Staff {
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
+            let personStaffViewController = segue.destinationViewController as! PersonStaffTableViewController
+            personStaffViewController.user = staffFetchedResultsController.objectAtIndexPath(indexPath) as? User
+        }
+    }
+    
+    
+    // MARK: - Private
+    
+    private func reloadData() {
+        do {
+            switch currentDisplay {
+            case .Students:
+                try studentsFetchedResultsController.performFetch()
+                
+            case .Staff:
+                try staffFetchedResultsController.performFetch()
+                
+            case .Groups:
+                break
+            }
+        } catch {
+            let nserror = error as NSError
+            print("Reload error \(nserror), \(nserror.userInfo)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    private func deleteUserData() {
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        
+        switch currentDisplay {
+        case .Students:
+            fetchRequest.predicate = NSPredicate(format: "type == %@", "students")
+        case .Staff:
+            fetchRequest.predicate = NSPredicate(format: "type == %@", "staff")
+        case .Groups:
+            break
+        }
+        
+        do {
+            try persistentStoreCoordinator.executeRequest(NSBatchDeleteRequest(fetchRequest: fetchRequest), withContext: managedObjectContext)
+        } catch {
+            let nserror = error as NSError
+            print("Delete error \(nserror), \(nserror.userInfo)")
+        }
+        
+    }
+    
+    
+    // MARK: - FontysClientDelegate
+    
+    func fontysClient(client: FontysClient, didFailWithError error: NSError) {
+        print("Request error \(error), \(error.userInfo)")
+    }
+    
+    func fontysClient(client: FontysClient, didGetUsersData data: NSData?) {
+        if (data != nil) {
+            deleteUserData()
+        }
+        
+        for (_, userDictionary) in JSON(data: data!) {
+            let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
+            
+            user.firstName   = userDictionary["givenName"].stringValue
+            user.firstName   = userDictionary["givenName"].stringValue
+            user.lastName    = userDictionary["surName"].stringValue
+            user.displayName = userDictionary["displayName"].stringValue
+            user.initials    = userDictionary["initials"].stringValue
+            user.mail        = userDictionary["mail"].stringValue
+            user.office      = userDictionary["office"].stringValue
+            user.phone       = userDictionary["telephoneNumber"].stringValue
+            user.pcn         = userDictionary["id"].stringValue
+            user.title       = userDictionary["title"].stringValue
+            user.department  = userDictionary["department"].stringValue
+            user.type        = "staff"
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                let nserror = error as NSError
+                print("Save error \(nserror), \(nserror.userInfo)")
+            }
+        }
+        
+        reloadData()
+    }
     
 }

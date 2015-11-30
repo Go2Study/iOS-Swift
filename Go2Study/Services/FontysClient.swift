@@ -8,17 +8,27 @@
 
 import Foundation
 
-class FontysClient {
+@objc protocol FontysClientDelegate {
+    optional func fontysClient(client: FontysClient, didFailWithError error: NSError)
+    
+    // Users
+    optional func fontysClient(client: FontysClient, didGetUsersData data: NSData?)
+    optional func fontysClient(client: FontysClient, didGetUserData data: NSData?, forPCN pcn: String)
+}
+
+@objc class FontysClient : NSObject {
     
     // MARK: - Constants
     
-    let ClientID    = "i271628-go2study-implicit"
-    let Scopes      = "fhict+fhict_personal+fhict_location"
-    let CallbackURL = "go2study://oauth/authorize"
-    let apiBaseURL  = NSURL(string: "https://tas.fhict.nl:443/api/v1/")
+    private let ClientID    = "i271628-go2study-implicit"
+    private let Scopes      = "fhict+fhict_personal+fhict_location"
+    private let CallbackURL = "go2study://oauth/authorize"
+    private let apiBaseURL  = NSURL(string: "https://tas.fhict.nl:443/api/v1/")
     
     
     // MARK: - Properties
+    
+    var delegate: FontysClientDelegate?
     
     var oauthURL: NSURL {
         get {
@@ -28,6 +38,7 @@ class FontysClient {
     
     var accessToken: String? {
         get {
+//            return "014a17734a2ffea887812a90738215c6"
             return NSUserDefaults.standardUserDefaults().valueForKey("fhictAccessToken") as? String
         }
         set {
@@ -50,6 +61,37 @@ class FontysClient {
         }
         
         accessToken = URLParameters["access_token"]!
+    }
+    
+    
+    // MARK: - Config
+    
+    private func getSessionAndRequest(endpoint: String, HTTPMethod: String) -> (session: NSURLSession, request: NSMutableURLRequest) {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = ["Authorization": "Bearer \(accessToken!)"]
+        let session = NSURLSession(configuration: configuration)
+        
+        let url = NSURL(string: endpoint, relativeToURL: apiBaseURL)
+        let request = NSMutableURLRequest(URL: url!)
+        request.HTTPMethod = HTTPMethod
+        
+        return (session, request)
+    }
+    
+    
+    // MARK: - Users
+    
+    func getUsers() {
+        let requestData = getSessionAndRequest("people?includeThumbs=false", HTTPMethod: "GET")
+        
+        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+            if error == nil {
+                self.delegate!.fontysClient!(self, didGetUsersData: data!)
+            } else {
+                self.delegate!.fontysClient!(self, didFailWithError: error!)
+            }
+        }
+        task.resume()
     }
 
 }
