@@ -88,9 +88,9 @@ import Foundation
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
             if error == nil {
-                self.delegate!.fontysClient!(self, didGetUsersData: data!)
+                self.delegate!.fontysClient?(self, didGetUsersData: data!)
             } else {
-                self.delegate!.fontysClient!(self, didFailWithError: error!)
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
             }
         }
         task.resume()
@@ -101,9 +101,9 @@ import Foundation
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
             if error == nil {
-                self.delegate!.fontysClient!(self, didGetUserData: data!, forPCN: pcn)
+                self.delegate!.fontysClient?(self, didGetUserData: data, forPCN: pcn)
             } else {
-                self.delegate!.fontysClient!(self, didFailWithError: error!)
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
             }
         }
         task.resume()
@@ -118,9 +118,9 @@ import Foundation
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
             if error == nil {
-                self.delegate!.fontysClient!(self, didGetUserImage: data!, forPCN: pcn)
+                self.delegate!.fontysClient?(self, didGetUserImage: data!, forPCN: pcn)
             } else {
-                self.delegate!.fontysClient!(self, didFailWithError: error!)
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
             }
         }
         task.resume()

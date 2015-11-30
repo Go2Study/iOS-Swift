@@ -48,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         if url.scheme == "go2study" {
             FontysClient().saveAccessToken(url)
+            (UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("fontysOAuthViewController") as! FontysOAuthViewController).oauthSuccessful()
             return true
         }
         

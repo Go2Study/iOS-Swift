@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		750B2B651C0C7A8F00945A91 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 750B2B641C0C7A8F00945A91 /* SwiftyJSON.framework */; };
 		750B2BA61C0CCC1500945A91 /* PersonStaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */; };
+		750B2BA81C0CE50700945A91 /* G2SClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA71C0CE50700945A91 /* G2SClient.swift */; };
 		75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */; };
 		75DF363C1C0B91F500A9B5E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75DF363A1C0B91F500A9B5E6 /* Main.storyboard */; };
 		75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75DF363D1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		750B2B641C0C7A8F00945A91 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonStaffTableViewController.swift; sourceTree = "<group>"; };
+		750B2BA71C0CE50700945A91 /* G2SClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = G2SClient.swift; sourceTree = "<group>"; };
 		75DF36331C0B91F400A9B5E6 /* Go2Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Go2Study.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75DF363B1C0B91F500A9B5E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */,
+				750B2BA71C0CE50700945A91 /* G2SClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */,
 				75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */,
 				75E8D9B71C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift in Sources */,
+				750B2BA81C0CE50700945A91 /* G2SClient.swift in Sources */,
 				750B2BA61C0CCC1500945A91 /* PersonStaffTableViewController.swift in Sources */,
 				75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */,
 				75E8D9B91C0BA2B1009B5E7B /* PeopleGroupViewCell.swift in Sources */,

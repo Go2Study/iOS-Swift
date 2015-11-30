@@ -52,6 +52,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     // MARK: - UIViewController
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRectZero)
         fontysClient.delegate = self
         reloadData()
@@ -219,7 +220,6 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
         for (_, userDictionary) in JSON(data: data!) {
             let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
             
-            user.firstName   = userDictionary["givenName"].stringValue
             user.firstName   = userDictionary["givenName"].stringValue
             user.lastName    = userDictionary["surName"].stringValue
             user.displayName = userDictionary["displayName"].stringValue
