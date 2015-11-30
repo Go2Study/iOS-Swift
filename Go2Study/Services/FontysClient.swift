@@ -14,6 +14,9 @@ import Foundation
     // Users
     optional func fontysClient(client: FontysClient, didGetUsersData data: NSData?)
     optional func fontysClient(client: FontysClient, didGetUserData data: NSData?, forPCN pcn: String)
+    
+    // Images
+    optional func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String)
 }
 
 @objc class FontysClient : NSObject {
@@ -38,7 +41,6 @@ import Foundation
     
     var accessToken: String? {
         get {
-//            return "014a17734a2ffea887812a90738215c6"
             return NSUserDefaults.standardUserDefaults().valueForKey("fhictAccessToken") as? String
         }
         set {
@@ -87,6 +89,36 @@ import Foundation
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.fontysClient!(self, didGetUsersData: data!)
+            } else {
+                self.delegate!.fontysClient!(self, didFailWithError: error!)
+            }
+        }
+        task.resume()
+    }
+    
+    func getUser(pcn: String) {
+        let requestData = getSessionAndRequest("people/\(pcn)", HTTPMethod: "GET")
+        
+        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+            if error == nil {
+                self.delegate!.fontysClient!(self, didGetUserData: data!, forPCN: pcn)
+            } else {
+                self.delegate!.fontysClient!(self, didFailWithError: error!)
+            }
+        }
+        task.resume()
+    }
+    
+    
+    // MARK: - Images
+    
+    func getImage(pcn: String) {
+        let requestData = getSessionAndRequest("pictures/\(pcn)/large", HTTPMethod: "GET")
+        print("Downloading Image: \(pcn)")
+        
+        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+            if error == nil {
+                self.delegate!.fontysClient!(self, didGetUserImage: data!, forPCN: pcn)
             } else {
                 self.delegate!.fontysClient!(self, didFailWithError: error!)
             }

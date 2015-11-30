@@ -76,6 +76,8 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     }
     
     @IBAction func buttonRefreshTouched(sender: UIBarButtonItem) {
+        print("reloading...")
+        
         switch currentDisplay {
         case .Students:
             break
@@ -91,6 +93,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
     @IBAction func buttonAddGroupTouched(sender: UIBarButtonItem) {
         
     }
+    
     
     // MARK: - UITableViewDataSource
     
@@ -127,11 +130,16 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
             return cell
             
         case .Staff:
-            
             let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
             cell.name.text = user.displayName
             cell.office.text = user.office
-            cell.photo.image = nil
+            
+            if let photo = user.photo {
+                cell.photo.image = UIImage(data: photo)
+            } else {
+                cell.photo.image = nil
+            }
+            
             return cell
             
         case .Groups:
@@ -235,4 +243,19 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate {
         reloadData()
     }
     
+    func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
+        fetchRequest.predicate = NSPredicate(format: "pcn == %@", pcn)
+        do {
+            let fetchedObjects = try managedObjectContext.executeFetchRequest(fetchRequest)
+            if fetchedObjects.count > 0 {
+                let user = fetchedObjects.first as! User
+                user.photo = data
+            }
+        } catch {
+            let nserror = error as NSError
+            print("User fetch error \(nserror), \(nserror.userInfo)")
+        }
+    }
 }
