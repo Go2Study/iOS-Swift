@@ -11,6 +11,8 @@
 		750B2BA61C0CCC1500945A91 /* PersonStaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */; };
 		750B2BA81C0CE50700945A91 /* G2SClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA71C0CE50700945A91 /* G2SClient.swift */; };
 		750B2BAA1C0CFF9900945A91 /* PersonStudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */; };
+		75B3A8271C0D355A007B02FE /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */; };
+		75B3A8281C0D355A007B02FE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8261C0D355A007B02FE /* Group.swift */; };
 		75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */; };
 		75DF363C1C0B91F500A9B5E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75DF363A1C0B91F500A9B5E6 /* Main.storyboard */; };
 		75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75DF363D1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld */; };
@@ -50,6 +52,8 @@
 		750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonStaffTableViewController.swift; sourceTree = "<group>"; };
 		750B2BA71C0CE50700945A91 /* G2SClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = G2SClient.swift; sourceTree = "<group>"; };
 		750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonStudentTableViewController.swift; sourceTree = "<group>"; };
+		75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75B3A8261C0D355A007B02FE /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		75DF36331C0B91F400A9B5E6 /* Go2Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Go2Study.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75DF363B1C0B91F500A9B5E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 		75E8D9BA1C0BAFB4009B5E7B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */,
+				75B3A8261C0D355A007B02FE /* Group.swift */,
 				75E8D9BB1C0BAFE0009B5E7B /* User+CoreDataProperties.swift */,
 				75E8D9BC1C0BAFE0009B5E7B /* User.swift */,
 			);
@@ -349,6 +355,7 @@
 				75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */,
 				750B2BAA1C0CFF9900945A91 /* PersonStudentTableViewController.swift in Sources */,
 				75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */,
+				75B3A8281C0D355A007B02FE /* Group.swift in Sources */,
 				75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */,
 				75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */,
 				75E8D9B71C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift in Sources */,
@@ -359,6 +366,7 @@
 				75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */,
 				75E8D9BE1C0BAFE0009B5E7B /* User.swift in Sources */,
 				75E8D9BD1C0BAFE0009B5E7B /* User+CoreDataProperties.swift in Sources */,
+				75B3A8271C0D355A007B02FE /* Group+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
