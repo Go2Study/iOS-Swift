@@ -97,16 +97,8 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         reloadData()
     }
     
-    @IBAction func buttonAddGroupTouched(sender: UIBarButtonItem) {
-        
-    }
-    
     
     // MARK: - UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentDisplay {
@@ -119,15 +111,15 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
                 return staffFetchedResultsController.sections![section].numberOfObjects
             }
         case .Groups:
-            break
+            if groupsFetchedResultsController.sections?.count > 0 {
+                return groupsFetchedResultsController.sections![section].numberOfObjects
+            }
         }
         
         return 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell") as! PeopleStaffTableViewCell
-        
         switch currentDisplay {
         case .Students :
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell") as! PeopleStudentTableViewCell
@@ -137,6 +129,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             return cell
             
         case .Staff:
+            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell") as! PeopleStaffTableViewCell
             let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
             cell.name.text = user.displayName
             cell.office.text = user.office
@@ -150,10 +143,11 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             return cell
             
         case .Groups:
-            break
+            let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell") as! PeopleGroupViewCell
+            let group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as! Group
+            cell.name.text = group.name
+            return cell
         }
-        
-        return cell
     }
     
     
@@ -168,6 +162,10 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let personStudentViewController = segue.destinationViewController as! PersonStudentTableViewController
             personStudentViewController.user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as? User
+        } else if segue.identifier == "peopleShowGroup" && currentDisplay == .Groups {
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
+            let groupViewController = segue.destinationViewController as! GroupTableViewController
+            groupViewController.group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as? Group
         }
     }
     
@@ -184,7 +182,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
                 try staffFetchedResultsController.performFetch()
                 
             case .Groups:
-                break
+                try groupsFetchedResultsController.performFetch()
             }
         } catch {
             let nserror = error as NSError
@@ -195,15 +193,17 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     }
     
     private func deleteUserData() {
-        let fetchRequest = NSFetchRequest(entityName: "User")
+        var fetchRequest = NSFetchRequest()
         
         switch currentDisplay {
         case .Students:
+            fetchRequest = NSFetchRequest(entityName: "User")
             fetchRequest.predicate = NSPredicate(format: "type == %@", "student")
         case .Staff:
+            fetchRequest = NSFetchRequest(entityName: "User")
             fetchRequest.predicate = NSPredicate(format: "type == %@", "staff")
         case .Groups:
-            break
+            fetchRequest = NSFetchRequest(entityName: "Group")
         }
         
         do {

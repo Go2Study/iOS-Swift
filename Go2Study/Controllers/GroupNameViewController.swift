@@ -28,7 +28,7 @@ class GroupNameViewController: UIViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "groupNameChooseMembers" {
-            let viewController = segue.destinationViewController as! GroupMembersTableViewController
+            let viewController = segue.destinationViewController as! GroupMembersCreateViewController
             viewController.groupName = textFieldName.text!
         }
     }

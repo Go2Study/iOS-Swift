@@ -1,5 +1,5 @@
 //
-//  GroupMembersTableViewController.swift
+//  GroupMembersCreateTableViewController.swift
 //  Go2Study
 //
 //  Created by Ashish Kumar on 02/12/15.
@@ -9,12 +9,12 @@
 import UIKit
 import CoreData
 
-class GroupMembersTableViewController: UITableViewController {
+class GroupMembersCreateViewController: UITableViewController {
 
     @IBOutlet weak var buttonSave: UIBarButtonItem!
     
     var groupName: String?
-    var groupMembers = [String]()
+    var groupMembers = [User]()
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -69,12 +69,18 @@ class GroupMembersTableViewController: UITableViewController {
         
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
-            groupMembers.append(user.pcn!)
+            groupMembers.append(user)
         } else {
             cell.accessoryType = .None
-            if let index = groupMembers.indexOf(user.pcn!) {
+            if let index = groupMembers.indexOf(user) {
                 groupMembers.removeAtIndex(index)
             }
+        }
+        
+        if groupMembers.count > 0 {
+            buttonSave.enabled = true
+        } else {
+            buttonSave.enabled = false
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -84,6 +90,19 @@ class GroupMembersTableViewController: UITableViewController {
     // MARK: - Actions
     
     @IBAction func buttonSaveTouched(sender: UIBarButtonItem) {
+        let group = NSEntityDescription.insertNewObjectForEntityForName("Group", inManagedObjectContext: managedObjectContext) as! Group
+        
+        group.name = groupName
+        group.users = NSSet(array: groupMembers)
+        
+        do {
+            try managedObjectContext.save()
+            navigationController?.popToRootViewControllerAnimated(true)
+        } catch {
+            let nserror = error as NSError
+            print("Save error \(nserror), \(nserror.userInfo)")
+        }
+        
     }
     
 }
