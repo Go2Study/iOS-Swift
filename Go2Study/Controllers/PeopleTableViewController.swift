@@ -25,7 +25,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     
     var fontysClient = FontysClient()
     var g2sClient = G2SClient()
-    var currentDisplay = displayOptions.Staff
+    var currentDisplay: displayOptions = .Staff
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -36,16 +36,22 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     }()
     
     lazy var studentsFetchedResultsController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest.init(entityName: "User")
+        let fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "type == %@", "student")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "displayName", ascending: true)]
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
     
     lazy var staffFetchedResultsController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest.init(entityName: "User")
+        let fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "type == %@", "staff")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "displayName", ascending: true)]
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+    }()
+    
+    lazy var groupsFetchedResultsController: NSFetchedResultsController = {
+        let fetchRequest = NSFetchRequest(entityName: "Group")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
     
@@ -154,12 +160,12 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
-        
         if segue.identifier == "peopleShowStaff" && currentDisplay == .Staff {
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let personStaffViewController = segue.destinationViewController as! PersonStaffTableViewController
             personStaffViewController.user = staffFetchedResultsController.objectAtIndexPath(indexPath) as? User
         } else if segue.identifier == "peopleShowStudent" && currentDisplay == .Students {
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let personStudentViewController = segue.destinationViewController as! PersonStudentTableViewController
             personStudentViewController.user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as? User
         }

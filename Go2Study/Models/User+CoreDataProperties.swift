@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Go2Study
 //
-//  Created by Ashish Kumar on 30/11/15.
+//  Created by Ashish Kumar on 01/12/15.
 //  Copyright © 2015 Go2Study. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -26,5 +26,6 @@ extension User {
     @NSManaged var photo: NSData?
     @NSManaged var title: String?
     @NSManaged var type: String?
+    @NSManaged var groups: NSSet?
 
 }
