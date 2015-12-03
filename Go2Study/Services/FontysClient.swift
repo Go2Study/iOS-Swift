@@ -71,7 +71,7 @@ import Foundation
     private func getSessionAndRequest(endpoint: String, HTTPMethod: String) -> (session: NSURLSession, request: NSMutableURLRequest) {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = ["Authorization": "Bearer \(accessToken!)"]
-        let session = NSURLSession(configuration: configuration)
+        let session = NSURLSession(configuration: configuration, delegate: nil, delegateQueue: NSOperationQueue.mainQueue())
         
         let url = NSURL(string: endpoint, relativeToURL: apiBaseURL)
         let request = NSMutableURLRequest(URL: url!)
@@ -112,13 +112,13 @@ import Foundation
     
     // MARK: - Images
     
-    func getImage(pcn: String) {
-        let requestData = getSessionAndRequest("pictures/\(pcn)/large", HTTPMethod: "GET")
-        print("Downloading Image: \(pcn)")
-        
-        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+    func getImage(pcn: String, completionHandler:(data: NSData?) -> Void) {
+        let requestData = getSessionAndRequest("pictures/\(pcn)/medium", HTTPMethod: "GET")
+        let task = requestData.session.downloadTaskWithRequest(requestData.request) { (url, response, error) -> Void in
             if error == nil {
-                self.delegate!.fontysClient?(self, didGetUserImage: data!, forPCN: pcn)
+                completionHandler(data: NSData(contentsOfURL: url!))
+                let data = NSData(contentsOfURL: url!)
+                self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
             } else {
                 self.delegate!.fontysClient?(self, didFailWithError: error!)
             }

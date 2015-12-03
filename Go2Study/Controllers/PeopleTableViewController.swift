@@ -124,20 +124,34 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         case .Students :
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell") as! PeopleStudentTableViewCell
             let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as! User
+            
             cell.name.text = user.displayName
-            cell.photo.image = nil
+            
+            if let photo = user.photo {
+                cell.photo.image = UIImage(data: photo)
+            } else {
+                cell.photo.image = nil
+                cell.photo.backgroundColor = UIColor.purpleColor()
+            }
+            
             return cell
             
         case .Staff:
-            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell") as! PeopleStaffTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell", forIndexPath: indexPath) as! PeopleStaffTableViewCell
+//            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell") as! PeopleStaffTableViewCell
             let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
+            
             cell.name.text = user.displayName
             cell.office.text = user.office
             
             if let photo = user.photo {
                 cell.photo.image = UIImage(data: photo)
             } else {
-                cell.photo.image = nil
+                fontysClient.getImage(user.pcn!, completionHandler: { (data) -> Void in
+                    user.photo = data
+                    cell.photo.image = UIImage(data: data!)
+                    cell.setNeedsLayout()
+                })
             }
             
             return cell
@@ -145,7 +159,9 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         case .Groups:
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell") as! PeopleGroupViewCell
             let group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as! Group
+            
             cell.name.text = group.name
+            
             return cell
         }
     }
@@ -241,31 +257,11 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             user.title       = userDictionary["title"].stringValue
             user.department  = userDictionary["department"].stringValue
             user.type        = "staff"
-            
-            do {
-                try managedObjectContext.save()
-            } catch {
-                let nserror = error as NSError
-                print("Save error \(nserror), \(nserror.userInfo)")
-            }
         }
         
-        reloadData()
-    }
-    
-    func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
-        fetchRequest.predicate = NSPredicate(format: "pcn == %@", pcn)
-        do {
-            let fetchedObjects = try managedObjectContext.executeFetchRequest(fetchRequest)
-            if fetchedObjects.count > 0 {
-                let user = fetchedObjects.first as! User
-                user.photo = data
-            }
-        } catch {
-            let nserror = error as NSError
-            print("User fetch error \(nserror), \(nserror.userInfo)")
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.reloadData()
+//            (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
         }
     }
     
@@ -290,15 +286,11 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             user.mail        = userDictionary["email"].stringValue
             user.pcn         = userDictionary["pcn"].stringValue
             user.type        = "student"
-            
-            do {
-                try managedObjectContext.save()
-            } catch {
-                let nserror = error as NSError
-                print("Save error \(nserror), \(nserror.userInfo)")
-            }
         }
         
-        reloadData()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.reloadData()
+//            (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
+        }
     }
 }
