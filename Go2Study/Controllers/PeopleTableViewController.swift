@@ -170,9 +170,6 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let groupViewController = segue.destinationViewController as! GroupTableViewController
             groupViewController.group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as? Group
-        } else if segue.identifier == "peopleCreateGroup" {
-            // ensure that we have some downloaded users
-            g2sClient.getUsers()
         }
     }
     
