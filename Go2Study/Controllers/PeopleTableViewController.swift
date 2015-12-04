@@ -229,6 +229,18 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         
     }
     
+    private func saveContext() {
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
+    
     
     // MARK: - FontysClientDelegate
     
@@ -259,11 +271,11 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             fontysClient.getImage(user.pcn!)
         }
         
+        saveContext()
         reloadData()
     }
     
     func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
-        
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
         fetchRequest.predicate = NSPredicate(format: "pcn == %@", pcn)
@@ -272,12 +284,14 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             if fetchedObjects.count > 0 {
                 let user = fetchedObjects.first as! User
                 user.photo = data
-                reloadData()
             }
         } catch {
             let nserror = error as NSError
             print("User fetch error \(nserror), \(nserror.userInfo)")
         }
+        
+        saveContext()
+        reloadData()
     }
     
     
@@ -303,6 +317,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             user.type        = "student"
         }
         
+        saveContext()
         reloadData()
     }
 }
