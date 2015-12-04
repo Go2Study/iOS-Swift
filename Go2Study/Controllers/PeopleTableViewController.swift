@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 import SwiftyJSON
 
-class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2SClientDelegate {
+class PeopleTableViewController: UITableViewController {
 
-    enum displayOptions {
+    private enum displayOptions {
         case Students
         case Staff
         case Groups
@@ -25,7 +25,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     
     var fontysClient = FontysClient()
     var g2sClient = G2SClient()
-    var currentDisplay: displayOptions = .Staff
+    private var currentDisplay: displayOptions = .Staff
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -116,40 +116,19 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         case .Students :
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell", forIndexPath: indexPath) as! PeopleStudentTableViewCell
             let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as! User
-            
-            cell.name.text = user.displayName
-            
-            if let photo = user.photo {
-                cell.photo.image = UIImage(data: photo)
-            } else {
-                cell.photo.image = nil
-                cell.photo.backgroundColor = view.tintColor
-            }
-            
+            cell.configure(user)
             return cell
             
         case .Staff:
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell", forIndexPath: indexPath) as! PeopleStaffTableViewCell
             let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
-            
-            cell.name.text = user.displayName
-            cell.office.text = user.office
-            
-            if let photo = user.photo {
-                cell.photo.image = UIImage(data: photo)
-            } else {
-                cell.photo.image = nil
-                cell.photo.backgroundColor = view.tintColor
-            }
-            
+            cell.configure(user)
             return cell
             
         case .Groups:
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell", forIndexPath: indexPath) as! PeopleGroupViewCell
             let group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as! Group
-            
-            cell.name.text = group.name
-            
+            cell.configure(group)
             return cell
         }
     }
@@ -172,11 +151,79 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             groupViewController.group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as? Group
         }
     }
+}
+
+
+// MARK: - FontysClientDelegate
+
+extension PeopleTableViewController: FontysClientDelegate {
     
+    func fontysClient(client: FontysClient, didFailWithError error: NSError) {
+        print("Request error \(error), \(error.userInfo)")
+    }
     
-    // MARK: - Private
+    func fontysClient(client: FontysClient, didFailWithOAuthError errorCode: Int) {
+        (UIApplication.sharedApplication().delegate as! AppDelegate).refreshFontysAccessToken()
+    }
     
-    @objc private func refreshData() {
+    func fontysClient(client: FontysClient, didGetUsersData data: NSData?) {
+        deleteData()
+        
+        for (_, userDictionary) in JSON(data: data!) {
+            let user = User.insertStaff(userDictionary, inManagedObjectContext: managedObjectContext)
+            fontysClient.getImage(user.pcn!)
+        }
+        
+        saveContext()
+        reloadTableView()
+        refreshControl!.endRefreshing()
+    }
+    
+    func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
+        User.savePhoto(data!, forPCN: pcn, inManagedObjectContext: managedObjectContext)
+        saveContext()
+    }
+}
+
+
+// MARK: - G2SClientDelegate
+
+extension PeopleTableViewController: G2SClientDelegate {
+    
+    func g2sClient(client: G2SClient, didFailWithError error: NSError) {
+        print("Request error \(error), \(error.userInfo)")
+    }
+    
+    func g2sClient(client: G2SClient, didGetUsersData data: NSData?) {
+        deleteData()
+        
+        for (_, userDictionary) in JSON(data: data!) {
+            User.insertStudent(userDictionary, inManagedObjectContext: managedObjectContext)
+        }
+        
+        saveContext()
+        reloadTableView()
+        refreshControl!.endRefreshing()
+    }
+    
+    func g2sClient(client: G2SClient, didGetGroupsData data: NSData?) {
+        deleteData()
+        
+        for (_, groupDictionary) in JSON(data: data!) {
+            Group.insert(groupDictionary, inManagedObjectContext: managedObjectContext)
+        }
+        
+        saveContext()
+        reloadTableView()
+        refreshControl!.endRefreshing()
+    }
+}
+
+
+// MARK: - Private
+
+private extension PeopleTableViewController {
+    @objc func refreshData() {
         switch currentDisplay {
         case .Students:
             g2sClient.getUsers()
@@ -189,7 +236,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         reloadTableView()
     }
     
-    private func reloadTableView() {
+    func reloadTableView() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             do {
                 switch self.currentDisplay {
@@ -211,30 +258,19 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         }
     }
     
-    private func deleteUserData() {
-        var fetchRequest = NSFetchRequest()
-        
+    func deleteData() {
         switch currentDisplay {
         case .Students:
-            fetchRequest = NSFetchRequest(entityName: "User")
-            fetchRequest.predicate = NSPredicate(format: "type == %@", "student")
+            User.deleteAll("student", inManagedObjectContext: managedObjectContext, persistentStoreCoordinator: persistentStoreCoordinator)
         case .Staff:
-            fetchRequest = NSFetchRequest(entityName: "User")
-            fetchRequest.predicate = NSPredicate(format: "type == %@", "staff")
+            User.deleteAll("staff", inManagedObjectContext: managedObjectContext, persistentStoreCoordinator: persistentStoreCoordinator)
         case .Groups:
-            fetchRequest = NSFetchRequest(entityName: "Group")
-        }
-        
-        do {
-            try persistentStoreCoordinator.executeRequest(NSBatchDeleteRequest(fetchRequest: fetchRequest), withContext: managedObjectContext)
-        } catch {
-            let nserror = error as NSError
-            print("Delete error \(nserror), \(nserror.userInfo)")
+            Group.deleteAll(managedObjectContext, persistentStoreCoordinator: persistentStoreCoordinator)
         }
         
     }
     
-    private func saveContext() {
+    func saveContext() {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
@@ -243,123 +279,5 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
-    }
-    
-    private func getUser(pcn: String) -> User? {
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
-        fetchRequest.predicate = NSPredicate(format: "pcn == %@", pcn)
-        do {
-            let fetchedObjects = try managedObjectContext.executeFetchRequest(fetchRequest)
-            if fetchedObjects.count > 0 {
-                return fetchedObjects.first as? User
-            }
-        } catch {
-            let nserror = error as NSError
-            print("User fetch error \(nserror), \(nserror.userInfo)")
-        }
-        
-        return nil
-    }
-    
-    
-    
-    // MARK: - FontysClientDelegate
-    
-    func fontysClient(client: FontysClient, didFailWithError error: NSError) {
-        print("Request error \(error), \(error.userInfo)")
-    }
-    
-    func fontysClient(client: FontysClient, didFailWithOAuthError errorCode: Int) {
-        (UIApplication.sharedApplication().delegate as! AppDelegate).refreshFontysAccessToken()
-    }
-    
-    func fontysClient(client: FontysClient, didGetUsersData data: NSData?) {
-        if (data != nil) {
-            deleteUserData()
-        }
-        
-        for (_, userDictionary) in JSON(data: data!) {
-            let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
-            
-            user.firstName   = userDictionary["givenName"].stringValue
-            user.lastName    = userDictionary["surName"].stringValue
-            user.displayName = userDictionary["displayName"].stringValue
-            user.initials    = userDictionary["initials"].stringValue
-            user.mail        = userDictionary["mail"].stringValue
-            user.office      = userDictionary["office"].stringValue
-            user.phone       = userDictionary["telephoneNumber"].stringValue
-            user.pcn         = userDictionary["id"].stringValue
-            user.title       = userDictionary["title"].stringValue
-            user.department  = userDictionary["department"].stringValue
-            user.type        = "staff"
-            
-            fontysClient.getImage(user.pcn!)
-        }
-        
-        saveContext()
-        reloadTableView()
-        refreshControl!.endRefreshing()
-    }
-    
-    func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
-        let user = getUser(pcn)
-        user?.photo = data
-        
-        saveContext()
-    }
-    
-    
-    // MARK: - G2SClientDelegate
-    
-    func g2sClient(client: G2SClient, didFailWithError error: NSError) {
-        print("Request error \(error), \(error.userInfo)")
-    }
-    
-    func g2sClient(client: G2SClient, didGetUsersData data: NSData?) {
-        deleteUserData()
-        
-        for (_, userDictionary) in JSON(data: data!) {
-            let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
-            
-            user.firstName   = userDictionary["firstName"].stringValue
-            user.lastName    = userDictionary["lastName"].stringValue
-            user.displayName = userDictionary["displayName"].stringValue
-            user.mail        = userDictionary["email"].stringValue
-            user.pcn         = userDictionary["pcn"].stringValue
-            user.type        = "student"
-        }
-        
-        saveContext()
-        reloadTableView()
-        refreshControl!.endRefreshing()
-    }
-    
-    func g2sClient(client: G2SClient, didGetGroupsData data: NSData?) {
-        deleteUserData()
-        
-        for (_, groupDictionary) in JSON(data: data!) {
-            let group = NSEntityDescription.insertNewObjectForEntityForName("Group", inManagedObjectContext: managedObjectContext) as! Group
-            
-            group.id   = groupDictionary["id"].intValue
-            group.name = groupDictionary["name"].stringValue
-            group.desc = groupDictionary["description"].stringValue
-            
-            var groupMembers = [User]()
-            
-            for pcn in groupDictionary["pcnlist"].arrayValue {
-                let user = getUser(pcn.stringValue)
-                
-                if let _ = user {
-                    groupMembers.append(user!)
-                }
-            }
-            
-            group.users = NSSet(array: groupMembers)
-        }
-        
-        saveContext()
-        reloadTableView()
-        refreshControl!.endRefreshing()
     }
 }

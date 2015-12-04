@@ -229,31 +229,51 @@
         <scene sceneID="9s5-8v-qJx">
             <objects>
                 <tableViewController id="4FN-uB-Njj" customClass="GroupMembersCreateViewController" customModule="Go2Study" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="m4I-kC-Sff">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" id="m4I-kC-Sff">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupStudentSelect" textLabel="qMI-xv-DmL" style="IBUITableViewCellStyleDefault" id="3mC-Vx-NKE">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="62" reuseIdentifier="groupStudentSelect" rowHeight="63" id="yLP-t9-zNf" customClass="PeopleStudentTableViewCell" customModule="Go2Study" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="63"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3mC-Vx-NKE" id="VKV-Nd-q72">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yLP-t9-zNf" id="n0J-80-8fR">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="62"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMI-xv-DmL">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-jR-EGV">
+                                            <rect key="frame" x="8" y="8" width="46" height="46"/>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="46" id="zmg-IC-F6Z"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHF-Ae-VWe">
+                                            <rect key="frame" x="62" y="20" width="530" height="21"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="Gaq-jR-EGV" firstAttribute="bottom" secondItem="n0J-80-8fR" secondAttribute="bottomMargin" id="IhP-6G-SaG"/>
+                                        <constraint firstItem="tHF-Ae-VWe" firstAttribute="leading" secondItem="Gaq-jR-EGV" secondAttribute="trailing" constant="8" symbolic="YES" id="SQF-fl-HuJ"/>
+                                        <constraint firstItem="Gaq-jR-EGV" firstAttribute="top" secondItem="n0J-80-8fR" secondAttribute="topMargin" id="ehF-bK-6IA"/>
+                                        <constraint firstItem="tHF-Ae-VWe" firstAttribute="top" secondItem="n0J-80-8fR" secondAttribute="topMargin" constant="12" id="fPd-Nj-nCU"/>
+                                        <constraint firstItem="tHF-Ae-VWe" firstAttribute="trailing" secondItem="n0J-80-8fR" secondAttribute="trailingMargin" id="ikg-cE-Sjn"/>
+                                        <constraint firstItem="Gaq-jR-EGV" firstAttribute="centerY" secondItem="tHF-Ae-VWe" secondAttribute="centerY" id="q3M-7L-OIJ"/>
+                                        <constraint firstItem="Gaq-jR-EGV" firstAttribute="leading" secondItem="n0J-80-8fR" secondAttribute="leadingMargin" id="sk2-ei-DqD"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <inset key="separatorInset" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="name" destination="tHF-Ae-VWe" id="Xko-4H-TY0"/>
+                                    <outlet property="photo" destination="Gaq-jR-EGV" id="tl6-mq-4UX"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -609,7 +629,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="" id="8dR-LS-XZr">
                                 <cells>
@@ -625,7 +645,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -683,7 +703,7 @@
         <scene sceneID="miv-rV-N8i">
             <objects>
                 <tableViewController id="oWf-vg-VLD" customClass="GroupMembersListTableViewController" customModule="Go2Study" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="9cH-uQ-cFF">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" id="9cH-uQ-cFF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -744,6 +764,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZTC-bj-taD"/>
+        <segue reference="1D1-D9-6wc"/>
     </inferredMetricsTieBreakers>
 </document>

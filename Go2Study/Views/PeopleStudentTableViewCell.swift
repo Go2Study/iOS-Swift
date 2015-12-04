@@ -21,3 +21,18 @@ class PeopleStudentTableViewCell: UITableViewCell {
         photo.backgroundColor = UIColor.whiteColor()
     }
 }
+
+extension PeopleStudentTableViewCell {
+    
+    func configure(user: User) {
+        name.text = user.displayName
+        
+        if let photo = user.photo {
+            self.photo.image = UIImage(data: photo)
+        } else {
+            photo.image = nil
+        }
+        
+    }
+    
+}

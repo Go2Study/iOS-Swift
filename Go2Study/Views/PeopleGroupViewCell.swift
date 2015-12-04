@@ -13,3 +13,11 @@ class PeopleGroupViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     
 }
+
+extension PeopleGroupViewCell {
+    
+    func configure(group: Group) {
+        name.text = group.name
+    }
+    
+}

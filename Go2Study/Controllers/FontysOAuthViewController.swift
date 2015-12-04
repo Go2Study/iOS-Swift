@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import SwiftyJSON
 
-class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegate, FontysClientDelegate, G2SClientDelegate {
+class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegate {
     
     var fontysClient = FontysClient()
     var g2sClient = G2SClient()
@@ -19,11 +19,20 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
     }()
     
     
+    // MARK: - UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        fontysClient.delegate = self
+        g2sClient.delegate = self
+    }
+    
+    
     // MARK: - Public
     
     func oauthSuccessful() {
         safariViewController.dismissViewControllerAnimated(true, completion: nil)
-        fontysClient.delegate = self
         fontysClient.getUser("me")
     }
     
@@ -40,9 +49,13 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
-    // MARK: - FontysClientDelegate
+
+}
+
+
+// MARK: - FontysClientDelegate
+
+extension FontysOAuthViewController: FontysClientDelegate {
     
     func fontysClient(client: FontysClient, didFailWithError error: NSError) {
         print("Request error \(error), \(error.userInfo)")
@@ -57,8 +70,6 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
         user["pcn"]       = json["id"].stringValue
         user["email"]     = json["mail"].stringValue
         
-        g2sClient.delegate = self
-        
         do {
             try g2sClient.postUser(JSON(user).rawData())
         } catch {
@@ -67,10 +78,15 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
         }
     }
     
-    // MARK: - G2SClientDelegate
+}
+
+
+// MARK: - G2SClientDelegate
+
+extension FontysOAuthViewController: G2SClientDelegate {
     
     func g2sClient(client: G2SClient, didFailWithError error: NSError) {
         print("Request error \(error), \(error.userInfo)")
     }
-
+    
 }

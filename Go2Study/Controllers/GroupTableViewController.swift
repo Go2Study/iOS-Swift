@@ -71,17 +71,4 @@ class GroupTableViewController: UITableViewController, G2SClientDelegate {
         }
     }
     
-    
-    // MARK: - Private
-    
-    private func deleteGroup() {
-        managedObjectContext.deleteObject(group!)
-        do {
-            try managedObjectContext.save()
-        } catch {
-            let nserror = error as NSError
-            print("Delete error \(nserror), \(nserror.userInfo)")
-        }
-    }
-    
 }

@@ -62,9 +62,9 @@ class GroupMembersCreateViewController: UITableViewController, G2SClientDelegate
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("groupStudentSelect")!
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupStudentSelect") as! PeopleStudentTableViewCell
         let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as! User
-        cell.textLabel?.text = user.displayName
+        cell.configure(user)
         return cell
     }
     

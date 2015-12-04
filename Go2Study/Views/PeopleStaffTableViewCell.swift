@@ -23,3 +23,18 @@ class PeopleStaffTableViewCell: UITableViewCell {
     }
     
 }
+
+extension PeopleStaffTableViewCell {
+    
+    func configure(user: User) {
+        name.text = user.displayName
+        office.text = user.office
+        
+        if let photo = user.photo {
+            self.photo.image = UIImage(data: photo)
+        } else {
+            self.photo.image = nil
+        }
+    }
+    
+}
