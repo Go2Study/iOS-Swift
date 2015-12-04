@@ -254,9 +254,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     }
     
     func fontysClient(client: FontysClient, didFailWithOAuthError errorCode: Int) {
-        fontysClient.resetAccessToken()
-        let oAuthViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("fontysOAuthViewController")
-        presentViewController(oAuthViewController, animated: true, completion: nil)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).refreshFontysAccessToken()
     }
     
     func fontysClient(client: FontysClient, didGetUsersData data: NSData?) {

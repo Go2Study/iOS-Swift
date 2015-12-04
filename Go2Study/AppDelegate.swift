@@ -14,6 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    lazy var fontysOAuthViewController: FontysOAuthViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewControllerWithIdentifier("fontysOAuthViewController") as! FontysOAuthViewController
+    }()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -117,8 +121,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
-    // MARK: - Private
+
+}
+
+extension AppDelegate {
+    func refreshFontysAccessToken() {
+        FontysClient().resetAccessToken()
+        window?.rootViewController = fontysOAuthViewController
+    }
     
     private func checkAuth() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -126,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let _ = FontysClient().accessToken {
             window?.rootViewController = storyboard.instantiateInitialViewController()
         } else {
-            window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("fontysOAuthViewController")
+            window?.rootViewController = fontysOAuthViewController
         }
         
         window?.makeKeyAndVisible()
