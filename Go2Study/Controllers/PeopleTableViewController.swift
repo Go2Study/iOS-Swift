@@ -170,6 +170,9 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let groupViewController = segue.destinationViewController as! GroupTableViewController
             groupViewController.group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as? Group
+        } else if segue.identifier == "peopleCreateGroup" {
+            // ensure that we have some downloaded users
+            g2sClient.getUsers()
         }
     }
     
@@ -317,9 +320,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     }
     
     func g2sClient(client: G2SClient, didGetUsersData data: NSData?) {
-        if (data != nil) {
-            deleteUserData()
-        }
+        deleteUserData()
         
         for (_, userDictionary) in JSON(data: data!) {
             let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
@@ -338,9 +339,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     }
     
     func g2sClient(client: G2SClient, didGetGroupsData data: NSData?) {
-        if (data != nil) {
-            deleteUserData()
-        }
+        deleteUserData()
         
         for (_, groupDictionary) in JSON(data: data!) {
             let group = NSEntityDescription.insertNewObjectForEntityForName("Group", inManagedObjectContext: managedObjectContext) as! Group

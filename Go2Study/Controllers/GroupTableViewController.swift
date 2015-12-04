@@ -9,9 +9,10 @@
 import UIKit
 import CoreData
 
-class GroupTableViewController: UITableViewController {
+class GroupTableViewController: UITableViewController, G2SClientDelegate {
 
     var group: Group?
+    var g2sClient = G2SClient()
     
     @IBOutlet weak var deleteGroupCell: UITableViewCell!
     
@@ -24,8 +25,11 @@ class GroupTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = group?.name
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        g2sClient.delegate = self
     }
     
     
@@ -42,7 +46,8 @@ class GroupTableViewController: UITableViewController {
             })
             
             let buttonDelete = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
-                self.deleteGroup()
+                let groupId = self.group?.id?.intValue
+                self.g2sClient.deleteGroup(groupId!)
                 alertController.dismissViewControllerAnimated(true, completion: nil)
                 self.navigationController?.popToRootViewControllerAnimated(true)
             })

@@ -166,7 +166,7 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="add" id="Dv9-5H-de4">
                             <connections>
                                 <action selector="buttonAddGroupTouched:" destination="q42-Z8-CSM" id="DjN-Lg-K4X"/>
-                                <segue destination="FDj-XQ-Lqr" kind="show" id="v2A-gI-cH5"/>
+                                <segue destination="FDj-XQ-Lqr" kind="show" identifier="peopleCreateGroup" id="v2A-gI-cH5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -20,6 +20,7 @@ import Foundation
     // Groups
     optional func g2sClient(client: G2SClient, didGetGroupsData data: NSData?)
     optional func g2sClient(client: G2SClient, didPostGroupWithResponse response: NSData?)
+    optional func g2sClient(client: G2SClient, didDeleteGroup id: Int32)
 }
 
 @objc class G2SClient: NSObject {
@@ -117,6 +118,19 @@ import Foundation
         let task = requestData.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didPostGroupWithResponse: data!)
+            } else {
+                self.delegate!.g2sClient?(self, didFailWithError: error!)
+            }
+        }
+        task.resume()
+    }
+    
+    func deleteGroup(id: Int32) {
+        let requestData = getSessionAndRequest("groups/\(id)", HTTPMethod: "DELETE")
+        
+        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+            if error == nil {
+                self.delegate!.g2sClient?(self, didDeleteGroup: id)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
