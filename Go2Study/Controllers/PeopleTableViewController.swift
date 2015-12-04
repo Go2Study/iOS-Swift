@@ -122,7 +122,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch currentDisplay {
         case .Students :
-            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell") as! PeopleStudentTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell", forIndexPath: indexPath) as! PeopleStudentTableViewCell
             let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as! User
             
             cell.name.text = user.displayName
@@ -131,14 +131,13 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
                 cell.photo.image = UIImage(data: photo)
             } else {
                 cell.photo.image = nil
-                cell.photo.backgroundColor = UIColor.purpleColor()
+                cell.photo.backgroundColor = view.tintColor
             }
             
             return cell
             
         case .Staff:
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell", forIndexPath: indexPath) as! PeopleStaffTableViewCell
-//            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStaffCell") as! PeopleStaffTableViewCell
             let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
             
             cell.name.text = user.displayName
@@ -147,17 +146,14 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             if let photo = user.photo {
                 cell.photo.image = UIImage(data: photo)
             } else {
-                fontysClient.getImage(user.pcn!, completionHandler: { (data) -> Void in
-                    user.photo = data
-                    cell.photo.image = UIImage(data: data!)
-                    cell.setNeedsLayout()
-                })
+                cell.photo.image = nil
+                cell.photo.backgroundColor = view.tintColor
             }
             
             return cell
             
         case .Groups:
-            let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell") as! PeopleGroupViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell", forIndexPath: indexPath) as! PeopleGroupViewCell
             let group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as! Group
             
             cell.name.text = group.name
@@ -189,23 +185,25 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     // MARK: - Private
     
     private func reloadData() {
-        do {
-            switch currentDisplay {
-            case .Students:
-                try studentsFetchedResultsController.performFetch()
-                
-            case .Staff:
-                try staffFetchedResultsController.performFetch()
-                
-            case .Groups:
-                try groupsFetchedResultsController.performFetch()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            do {
+                switch self.currentDisplay {
+                case .Students:
+                    try self.studentsFetchedResultsController.performFetch()
+                    
+                case .Staff:
+                    try self.staffFetchedResultsController.performFetch()
+                    
+                case .Groups:
+                    try self.groupsFetchedResultsController.performFetch()
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Reload error \(nserror), \(nserror.userInfo)")
             }
-        } catch {
-            let nserror = error as NSError
-            print("Reload error \(nserror), \(nserror.userInfo)")
+            
+            self.tableView.reloadData()
         }
-        
-        tableView.reloadData()
     }
     
     private func deleteUserData() {
@@ -257,11 +255,28 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             user.title       = userDictionary["title"].stringValue
             user.department  = userDictionary["department"].stringValue
             user.type        = "staff"
+            
+            fontysClient.getImage(user.pcn!)
         }
         
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.reloadData()
-//            (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
+        reloadData()
+    }
+    
+    func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
+        
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedObjectContext)
+        fetchRequest.predicate = NSPredicate(format: "pcn == %@", pcn)
+        do {
+            let fetchedObjects = try managedObjectContext.executeFetchRequest(fetchRequest)
+            if fetchedObjects.count > 0 {
+                let user = fetchedObjects.first as! User
+                user.photo = data
+                reloadData()
+            }
+        } catch {
+            let nserror = error as NSError
+            print("User fetch error \(nserror), \(nserror.userInfo)")
         }
     }
     
@@ -288,9 +303,6 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             user.type        = "student"
         }
         
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.reloadData()
-//            (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
-        }
+        reloadData()
     }
 }

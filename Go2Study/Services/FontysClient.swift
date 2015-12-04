@@ -112,11 +112,10 @@ import Foundation
     
     // MARK: - Images
     
-    func getImage(pcn: String, completionHandler:(data: NSData?) -> Void) {
+    func getImage(pcn: String) {
         let requestData = getSessionAndRequest("pictures/\(pcn)/medium", HTTPMethod: "GET")
         let task = requestData.session.downloadTaskWithRequest(requestData.request) { (url, response, error) -> Void in
             if error == nil {
-                completionHandler(data: NSData(contentsOfURL: url!))
                 let data = NSData(contentsOfURL: url!)
                 self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
             } else {
