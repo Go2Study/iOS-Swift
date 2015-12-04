@@ -303,7 +303,6 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         }
         
         saveContext()
-        reloadTableView()
     }
     
     
