@@ -113,7 +113,7 @@ import Foundation
     // MARK: - Images
     
     func getImage(pcn: String) {
-        let requestData = getSessionAndRequest("pictures/\(pcn)/medium", HTTPMethod: "GET")
+        let requestData = getSessionAndRequest("pictures/\(pcn)/large", HTTPMethod: "GET")
         let task = requestData.session.downloadTaskWithRequest(requestData.request) { (url, response, error) -> Void in
             if error == nil {
                 let data = NSData(contentsOfURL: url!)
