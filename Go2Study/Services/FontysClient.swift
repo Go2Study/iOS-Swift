@@ -9,7 +9,9 @@
 import Foundation
 
 @objc protocol FontysClientDelegate {
+    // Errors
     optional func fontysClient(client: FontysClient, didFailWithError error: NSError)
+    optional func fontysClient(client: FontysClient, didFailWithOAuthError errorCode: Int)
     
     // Users
     optional func fontysClient(client: FontysClient, didGetUsersData data: NSData?)
@@ -39,7 +41,7 @@ import Foundation
         }
     }
     
-    var accessToken: String? {
+     private(set) var accessToken: String? {
         get {
             return NSUserDefaults.standardUserDefaults().valueForKey("fhictAccessToken") as? String
         }
@@ -65,6 +67,11 @@ import Foundation
         accessToken = URLParameters["access_token"]!
     }
     
+    func resetAccessToken() {
+        accessToken = nil
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("fhictAccessToken")
+    }
+    
     
     // MARK: - Config
     
@@ -87,10 +94,12 @@ import Foundation
         let requestData = getSessionAndRequest("people?includeThumbs=false", HTTPMethod: "GET")
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
-            if error == nil {
-                self.delegate!.fontysClient?(self, didGetUsersData: data!)
-            } else {
+            if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            } else if error != nil {
                 self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else {
+                self.delegate!.fontysClient?(self, didGetUsersData: data!)
             }
         }
         task.resume()
@@ -100,10 +109,12 @@ import Foundation
         let requestData = getSessionAndRequest("people/\(pcn)", HTTPMethod: "GET")
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
-            if error == nil {
-                self.delegate!.fontysClient?(self, didGetUserData: data, forPCN: pcn)
-            } else {
+            if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            } else if error != nil {
                 self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else {
+                self.delegate!.fontysClient?(self, didGetUserData: data, forPCN: pcn)
             }
         }
         task.resume()
@@ -115,11 +126,13 @@ import Foundation
     func getImage(pcn: String) {
         let requestData = getSessionAndRequest("pictures/\(pcn)/large", HTTPMethod: "GET")
         let task = requestData.session.downloadTaskWithRequest(requestData.request) { (url, response, error) -> Void in
-            if error == nil {
+            if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            } else if error != nil {
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else {
                 let data = NSData(contentsOfURL: url!)
                 self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
-            } else {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
             }
         }
         task.resume()

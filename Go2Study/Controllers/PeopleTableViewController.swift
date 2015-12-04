@@ -253,6 +253,12 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         print("Request error \(error), \(error.userInfo)")
     }
     
+    func fontysClient(client: FontysClient, didFailWithOAuthError errorCode: Int) {
+        fontysClient.resetAccessToken()
+        let oAuthViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("fontysOAuthViewController")
+        presentViewController(oAuthViewController, animated: true, completion: nil)
+    }
+    
     func fontysClient(client: FontysClient, didGetUsersData data: NSData?) {
         if (data != nil) {
             deleteUserData()
