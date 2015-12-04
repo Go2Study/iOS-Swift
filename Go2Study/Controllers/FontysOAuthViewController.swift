@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import SafariServices
 import SwiftyJSON
 
-class FontysOAuthViewController: UIViewController, FontysClientDelegate, G2SClientDelegate {
+class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegate, FontysClientDelegate, G2SClientDelegate {
     
     var fontysClient = FontysClient()
     var g2sClient = G2SClient()
+    lazy var safariViewController: SFSafariViewController = {
+        return SFSafariViewController(URL: FontysClient().oauthURL)
+    }()
     
     
     // MARK: - Public
     
     func oauthSuccessful() {
+        safariViewController.dismissViewControllerAnimated(true, completion: nil)
         fontysClient.delegate = self
         fontysClient.getUser("me")
     }
@@ -26,7 +31,15 @@ class FontysOAuthViewController: UIViewController, FontysClientDelegate, G2SClie
     // MARK: - Actions
     
     @IBAction func buttonLoginTouched() {
-        UIApplication.sharedApplication().openURL(FontysClient().oauthURL)
+        presentViewController(safariViewController, animated: true, completion: nil)
+//        UIApplication.sharedApplication().openURL(FontysClient().oauthURL)
+    }
+    
+    
+    // MARK: - SFSafariViewControllerDelegate
+    
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
