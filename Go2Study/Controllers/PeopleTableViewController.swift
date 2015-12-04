@@ -60,10 +60,15 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refreshData", forControlEvents: .ValueChanged)
+        
         g2sClient.delegate = self
         fontysClient.delegate = self
-        reloadData()
+        
+        reloadTableView()
     }
     
     
@@ -81,20 +86,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
             buttonCreateGroup.enabled = true
         }
         
-        reloadData()
-    }
-    
-    @IBAction func buttonRefreshTouched(sender: UIBarButtonItem) {
-        switch currentDisplay {
-        case .Students:
-            g2sClient.getUsers()
-        case .Staff:
-            fontysClient.getUsers()
-        case .Groups:
-            break
-        }
-        
-        reloadData()
+        reloadTableView()
     }
     
     
@@ -184,7 +176,20 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
     
     // MARK: - Private
     
-    private func reloadData() {
+    @objc private func refreshData() {
+        switch currentDisplay {
+        case .Students:
+            g2sClient.getUsers()
+        case .Staff:
+            fontysClient.getUsers()
+        case .Groups:
+            break
+        }
+        
+        reloadTableView()
+    }
+    
+    private func reloadTableView() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             do {
                 switch self.currentDisplay {
@@ -272,7 +277,8 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         }
         
         saveContext()
-        reloadData()
+        reloadTableView()
+        refreshControl!.endRefreshing()
     }
     
     func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
@@ -291,7 +297,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         }
         
         saveContext()
-        reloadData()
+        reloadTableView()
     }
     
     
@@ -318,6 +324,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         }
         
         saveContext()
-        reloadData()
+        reloadTableView()
+        refreshControl!.endRefreshing()
     }
 }

@@ -150,11 +150,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="83X-XW-u49">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="hTT-YI-Y4j">
-                            <connections>
-                                <action selector="buttonRefreshTouched:" destination="q42-Z8-CSM" id="bs6-b9-NYM"/>
-                            </connections>
-                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="04o-ah-T6w">
                             <rect key="frame" x="180" y="7" width="240" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
