@@ -183,7 +183,7 @@ class PeopleTableViewController: UITableViewController, FontysClientDelegate, G2
         case .Staff:
             fontysClient.getUsers()
         case .Groups:
-            break
+            refreshControl!.endRefreshing()
         }
         
         reloadTableView()

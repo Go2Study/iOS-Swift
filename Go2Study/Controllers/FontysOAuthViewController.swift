@@ -32,7 +32,6 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
     
     @IBAction func buttonLoginTouched() {
         presentViewController(safariViewController, animated: true, completion: nil)
-//        UIApplication.sharedApplication().openURL(FontysClient().oauthURL)
     }
     
     

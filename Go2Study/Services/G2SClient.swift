@@ -16,6 +16,10 @@ import Foundation
     optional func g2sClient(client: G2SClient, didGetUserData data: NSData?, forPCN pcn: String)
     optional func g2sClient(client: G2SClient, didPostUserWithResponse response: NSData?)
     optional func g2sClient(client: G2SClient, didPutUserWithResponse response: NSData?, forPCN pcn: String)
+    
+    // Groups
+    optional func g2sClient(client: G2SClient, didGetGroupsData data: NSData?)
+    optional func g2sClient(client: G2SClient, didPostGroupWithResponse response: NSData?)
 }
 
 @objc class G2SClient: NSObject {
@@ -86,6 +90,37 @@ import Foundation
             }
         }
         task.resume()
+    }
+    
+    
+    // MARK: - Groups
+    
+    func getGroups() {
+        let requestData = getSessionAndRequest("groups", HTTPMethod: "GET")
         
+        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+            if error == nil {
+                self.delegate!.g2sClient?(self, didGetGroupsData: data!)
+            } else {
+                self.delegate!.g2sClient?(self, didFailWithError: error!)
+            }
+        }
+        task.resume()
+    }
+    
+    func postGroup(data: NSData) {
+        let requestData = getSessionAndRequest("groups", HTTPMethod: "POST")
+        let request = requestData.request
+        request.HTTPBody = data
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = requestData.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            if error == nil {
+                self.delegate!.g2sClient?(self, didPostGroupWithResponse: data!)
+            } else {
+                self.delegate!.g2sClient?(self, didFailWithError: error!)
+            }
+        }
+        task.resume()
     }
 }
