@@ -94,10 +94,10 @@ import Foundation
         let requestData = getSessionAndRequest("people?includeThumbs=false", HTTPMethod: "GET")
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
-            if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else if error != nil {
+            if error != nil {
                 self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
             } else {
                 self.delegate!.fontysClient?(self, didGetUsersData: data!)
             }
@@ -109,10 +109,10 @@ import Foundation
         let requestData = getSessionAndRequest("people/\(pcn)", HTTPMethod: "GET")
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
-            if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else if error != nil {
+            if error != nil {
                 self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
             } else {
                 self.delegate!.fontysClient?(self, didGetUserData: data, forPCN: pcn)
             }
@@ -126,10 +126,10 @@ import Foundation
     func getImage(pcn: String) {
         let requestData = getSessionAndRequest("pictures/\(pcn)/large", HTTPMethod: "GET")
         let task = requestData.session.downloadTaskWithRequest(requestData.request) { (url, response, error) -> Void in
-            if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else if error != nil {
+            if error != nil {
                 self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
             } else {
                 let data = NSData(contentsOfURL: url!)
                 self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
