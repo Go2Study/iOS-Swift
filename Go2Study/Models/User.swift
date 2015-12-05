@@ -40,6 +40,7 @@ class User: NSManagedObject {
         user.title       = dictionary["title"].stringValue
         user.department  = dictionary["department"].stringValue
         user.type        = "staff"
+        user.photo       = NSData(base64EncodedString: dictionary["thumbnailData"].stringValue, options: NSDataBase64DecodingOptions(rawValue: 0))
         
         return user
     }

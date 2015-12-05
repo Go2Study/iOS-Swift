@@ -116,6 +116,7 @@ class PeopleTableViewController: UITableViewController {
         case .Students :
             let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell", forIndexPath: indexPath) as! PeopleStudentTableViewCell
             let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as! User
+            
             cell.configure(user)
             return cell
             
@@ -159,6 +160,7 @@ class PeopleTableViewController: UITableViewController {
 extension PeopleTableViewController: FontysClientDelegate {
     
     func fontysClient(client: FontysClient, didFailWithError error: NSError) {
+        refreshControl!.endRefreshing()
         print("Request error \(error), \(error.userInfo)")
     }
     
@@ -170,8 +172,7 @@ extension PeopleTableViewController: FontysClientDelegate {
         deleteData()
         
         for (_, userDictionary) in JSON(data: data!) {
-            let user = User.insertStaff(userDictionary, inManagedObjectContext: managedObjectContext)
-            fontysClient.getImage(user.pcn!)
+            User.insertStaff(userDictionary, inManagedObjectContext: managedObjectContext)
         }
         
         saveContext()
@@ -191,6 +192,7 @@ extension PeopleTableViewController: FontysClientDelegate {
 extension PeopleTableViewController: G2SClientDelegate {
     
     func g2sClient(client: G2SClient, didFailWithError error: NSError) {
+        refreshControl!.endRefreshing()
         print("Request error \(error), \(error.userInfo)")
     }
     

@@ -91,7 +91,7 @@ import Foundation
     // MARK: - Users
     
     func getUsers() {
-        let requestData = getSessionAndRequest("people?includeThumbs=false", HTTPMethod: "GET")
+        let requestData = getSessionAndRequest("people?includeThumbs=true", HTTPMethod: "GET")
         
         let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
             if error != nil {
