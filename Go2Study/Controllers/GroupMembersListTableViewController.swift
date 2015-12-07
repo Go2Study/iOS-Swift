@@ -44,7 +44,7 @@ class GroupMembersListTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "groupShowStudent" {
+        if segue.identifier == "GroupShowStudent" {
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let personStudentViewController = segue.destinationViewController as! PersonStudentTableViewController
             personStudentViewController.user = users[indexPath.row]

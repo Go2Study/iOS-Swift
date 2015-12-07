@@ -22,10 +22,8 @@ class Group: NSManagedObject {
         var groupMembers = [User]()
         
         for pcn in dictionary["pcnlist"].arrayValue {
-            let user = User.find(pcn.stringValue, inManagedObjectContext: managedObjectContext)
-            
-            if let _ = user {
-                groupMembers.append(user!)
+            if let user = User.find(pcn.stringValue, inManagedObjectContext: managedObjectContext) {
+                groupMembers.append(user)
             }
         }
         

@@ -28,7 +28,11 @@ class PeopleTableViewController: UITableViewController {
     private var currentDisplay: displayOptions = .Staff
     
     lazy var managedObjectContext: NSManagedObjectContext = {
-        return (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectContext.performBlockAndWait({
+            managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        })
+        return managedObjectContext
     }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -138,15 +142,15 @@ class PeopleTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "peopleShowStaff" && currentDisplay == .Staff {
+        if segue.identifier == "PeopleShowStaff" {
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let personStaffViewController = segue.destinationViewController as! PersonStaffTableViewController
             personStaffViewController.user = staffFetchedResultsController.objectAtIndexPath(indexPath) as? User
-        } else if segue.identifier == "peopleShowStudent" && currentDisplay == .Students {
+        } else if segue.identifier == "PeopleShowStudent" {
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let personStudentViewController = segue.destinationViewController as! PersonStudentTableViewController
             personStudentViewController.user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as? User
-        } else if segue.identifier == "peopleShowGroup" && currentDisplay == .Groups {
+        } else if segue.identifier == "PeopleShowGroup" {
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
             let groupViewController = segue.destinationViewController as! GroupTableViewController
             groupViewController.group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as? Group
@@ -239,7 +243,7 @@ private extension PeopleTableViewController {
     }
     
     func reloadTableView() {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        dispatch_async(dispatch_get_main_queue()) {
             do {
                 switch self.currentDisplay {
                 case .Students:
@@ -269,7 +273,7 @@ private extension PeopleTableViewController {
         case .Groups:
             Group.deleteAll(managedObjectContext, persistentStoreCoordinator: persistentStoreCoordinator)
         }
-        
+        reloadTableView()
     }
     
     func saveContext() {

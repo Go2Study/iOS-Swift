@@ -1,5 +1,5 @@
 //
-//  GroupNameViewController.swift
+//  GroupCreateViewController.swift
 //  Go2Study
 //
 //  Created by Ashish Kumar on 02/12/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupNameViewController: UIViewController, UITextFieldDelegate {
+class GroupCreateViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var buttonNext: UIBarButtonItem!
     @IBOutlet weak var textFieldName: UITextField!
@@ -27,8 +27,8 @@ class GroupNameViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "groupNameChooseMembers" {
-            let viewController = segue.destinationViewController as! GroupMembersCreateViewController
+        if segue.identifier == "GroupCreateMembers" {
+            let viewController = segue.destinationViewController as! GroupCreateMembersTableViewController
             viewController.groupName = textFieldName.text!
         }
     }
@@ -39,7 +39,7 @@ class GroupNameViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField.text?.characters.count > 0 {
             textField.resignFirstResponder()
-            performSegueWithIdentifier("groupNameChooseMembers", sender: self)
+            performSegueWithIdentifier("GroupCreateMembers", sender: self)
             return true
         }
         

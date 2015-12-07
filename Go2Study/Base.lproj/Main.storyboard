@@ -14,18 +14,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bsc-PZ-fDa">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bsc-PZ-fDa" id="jEl-ym-OQh">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="th6-BA-sPh" id="rGo-dO-9jh"/>
                             <outlet property="delegate" destination="th6-BA-sPh" id="yxW-op-81Y"/>
@@ -66,18 +54,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zFQ-Sy-1bG">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zFQ-Sy-1bG" id="W0K-vL-geg">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Fjk-7r-pmg" id="jVw-iN-jjw"/>
                             <outlet property="delegate" destination="Fjk-7r-pmg" id="5fc-Mh-60X"/>
@@ -87,7 +63,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heU-2K-8fZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="1758"/>
+            <point key="canvasLocation" x="2311" y="1063"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="gvh-If-k4i">
@@ -98,18 +74,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KQ2-Wg-gaI">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KQ2-Wg-gaI" id="mUU-Ba-P1A">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="YnR-2j-ASw" id="5Ob-pe-3O8"/>
                             <outlet property="delegate" destination="YnR-2j-ASw" id="PiP-sE-8xY"/>
@@ -121,7 +85,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iS3-yV-vQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="2464"/>
+            <point key="canvasLocation" x="2311" y="1769"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="opJ-zH-ONy">
@@ -139,7 +103,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ac9-sh-0kA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1623" y="2464"/>
+            <point key="canvasLocation" x="1623" y="1769"/>
         </scene>
         <!--Settings-->
         <scene sceneID="rFX-4Y-qlL">
@@ -157,7 +121,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMl-Q9-khz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1623" y="1758"/>
+            <point key="canvasLocation" x="1623" y="1063"/>
         </scene>
         <!--People-->
         <scene sceneID="DYO-dR-Z6c">
@@ -209,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811" y="1063"/>
+            <point key="canvasLocation" x="883" y="1769"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="d4J-3S-Ou7">
@@ -230,7 +194,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cy0-Jd-kOL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811" y="-357"/>
+            <point key="canvasLocation" x="883" y="699"/>
         </scene>
         <!--People-->
         <scene sceneID="J6j-kE-7xY">

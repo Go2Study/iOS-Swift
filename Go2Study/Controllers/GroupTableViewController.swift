@@ -65,7 +65,7 @@ class GroupTableViewController: UITableViewController, G2SClientDelegate {
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "groupShowMembers" {
+        if segue.identifier == "GroupShowMembers" {
             let groupMembersViewController = segue.destinationViewController as! GroupMembersListTableViewController
             groupMembersViewController.group = group
         }

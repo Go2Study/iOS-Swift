@@ -68,7 +68,7 @@
                                     <outlet property="name" destination="Xjb-VB-nQs" id="HvK-le-BQe"/>
                                     <outlet property="office" destination="fsl-HX-CRY" id="MKR-GH-r2t"/>
                                     <outlet property="photo" destination="axN-Fh-Jkh" id="Yk4-w1-Hhs"/>
-                                    <segue destination="fJl-dM-Pmx" kind="show" identifier="peopleShowStaff" id="s3H-WX-ZYy"/>
+                                    <segue destination="fJl-dM-Pmx" kind="show" identifier="PeopleShowStaff" id="s3H-WX-ZYy"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="62" reuseIdentifier="peopleStudentCell" rowHeight="63" id="FXK-dd-IcO" customClass="PeopleStudentTableViewCell" customModule="Go2Study" customModuleProvider="target">
@@ -109,7 +109,7 @@
                                 <connections>
                                     <outlet property="name" destination="Ur9-VZ-SYa" id="tVh-OM-wx0"/>
                                     <outlet property="photo" destination="Y4U-2x-dDw" id="RX7-sl-EC4"/>
-                                    <segue destination="L0L-GT-8hY" kind="show" identifier="peopleShowStudent" id="ZTC-bj-taD"/>
+                                    <segue destination="L0L-GT-8hY" kind="show" identifier="PeopleShowStudent" id="ZTC-bj-taD"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="62" reuseIdentifier="peopleGroupCell" rowHeight="63" id="k3O-ta-TIW" customClass="PeopleGroupViewCell" customModule="Go2Study" customModuleProvider="target">
@@ -139,7 +139,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="name" destination="Sbm-rZ-NSO" id="eV2-53-4Lj"/>
-                                    <segue destination="Vh4-W8-nDQ" kind="show" identifier="peopleShowGroup" id="6fW-90-JxC"/>
+                                    <segue destination="Vh4-W8-nDQ" kind="show" identifier="PeopleShowGroup" id="6fW-90-JxC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -166,7 +166,7 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="add" id="Dv9-5H-de4">
                             <connections>
                                 <action selector="buttonAddGroupTouched:" destination="q42-Z8-CSM" id="DjN-Lg-K4X"/>
-                                <segue destination="FDj-XQ-Lqr" kind="show" identifier="peopleCreateGroup" id="v2A-gI-cH5"/>
+                                <segue destination="FDj-XQ-Lqr" kind="show" identifier="PeopleCreateGroup" id="v2A-gI-cH5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -180,10 +180,10 @@
             </objects>
             <point key="canvasLocation" x="2311" y="-357"/>
         </scene>
-        <!--Group Name-->
+        <!--Create Student Group-->
         <scene sceneID="a3B-Jr-aD6">
             <objects>
-                <viewController id="FDj-XQ-Lqr" customClass="GroupNameViewController" customModule="Go2Study" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FDj-XQ-Lqr" customClass="GroupCreateViewController" customModule="Go2Study" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="57t-Oc-beR"/>
                         <viewControllerLayoutGuide type="bottom" id="eKG-ll-vqI"/>
@@ -192,8 +192,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elM-VF-uLh">
+                                <rect key="frame" x="20" y="72" width="96" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OfX-ef-bFK">
-                                <rect key="frame" x="20" y="72" width="560" height="30"/>
+                                <rect key="frame" x="20" y="101" width="560" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -203,16 +210,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="OfX-ef-bFK" firstAttribute="trailing" secondItem="Z6f-Mc-5o1" secondAttribute="trailingMargin" id="Fzj-1l-QdP"/>
-                            <constraint firstItem="OfX-ef-bFK" firstAttribute="top" secondItem="57t-Oc-beR" secondAttribute="bottom" constant="8" symbolic="YES" id="chN-pf-3NR"/>
+                            <constraint firstItem="elM-VF-uLh" firstAttribute="leading" secondItem="OfX-ef-bFK" secondAttribute="leading" id="P4v-jE-exD"/>
+                            <constraint firstItem="elM-VF-uLh" firstAttribute="top" secondItem="57t-Oc-beR" secondAttribute="bottom" constant="8" symbolic="YES" id="aDR-Lm-PlQ"/>
+                            <constraint firstItem="OfX-ef-bFK" firstAttribute="top" secondItem="57t-Oc-beR" secondAttribute="bottom" constant="37" id="chN-pf-3NR"/>
                             <constraint firstItem="OfX-ef-bFK" firstAttribute="leading" secondItem="Z6f-Mc-5o1" secondAttribute="leadingMargin" id="sDb-Vm-qfe"/>
+                            <constraint firstItem="OfX-ef-bFK" firstAttribute="top" secondItem="elM-VF-uLh" secondAttribute="bottom" constant="8" symbolic="YES" id="vNC-sT-aWn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Group Name" id="bIx-Iy-pU7">
+                    <navigationItem key="navigationItem" title="Create Student Group" id="bIx-Iy-pU7">
                         <barButtonItem key="backBarButtonItem" title="Groups" id="y8z-OW-Xff"/>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="lzC-fs-Tee">
                             <connections>
                                 <action selector="buttonNextTouched:" destination="FDj-XQ-Lqr" id="q8z-h2-EYi"/>
-                                <segue destination="4FN-uB-Njj" kind="show" identifier="groupNameChooseMembers" id="f7l-rH-3sG"/>
+                                <segue destination="4FN-uB-Njj" kind="show" identifier="GroupCreateMembers" id="f7l-rH-3sG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -228,7 +238,7 @@
         <!--Choose Members-->
         <scene sceneID="9s5-8v-qJx">
             <objects>
-                <tableViewController id="4FN-uB-Njj" customClass="GroupMembersCreateViewController" customModule="Go2Study" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4FN-uB-Njj" customClass="GroupCreateMembersTableViewController" customModule="Go2Study" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" id="m4I-kC-Sff">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -653,7 +663,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="oWf-vg-VLD" kind="show" identifier="groupShowMembers" id="Knu-hn-ceT"/>
+                                            <segue destination="oWf-vg-VLD" kind="show" identifier="GroupShowMembers" id="Knu-hn-ceT"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -747,7 +757,7 @@
                                 <connections>
                                     <outlet property="name" destination="NW0-RS-uFJ" id="Yha-o8-7FB"/>
                                     <outlet property="photo" destination="Dm1-nr-SEz" id="foz-Hg-GC8"/>
-                                    <segue destination="L0L-GT-8hY" kind="show" identifier="groupShowStudent" id="1D1-D9-6wc"/>
+                                    <segue destination="L0L-GT-8hY" kind="show" identifier="GroupShowStudent" id="1D1-D9-6wc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

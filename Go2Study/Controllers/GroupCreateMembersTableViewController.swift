@@ -1,5 +1,5 @@
 //
-//  GroupMembersCreateTableViewController.swift
+//  GroupCreateMembersTableViewController.swift
 //  Go2Study
 //
 //  Created by Ashish Kumar on 02/12/15.
@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import SwiftyJSON
 
-class GroupMembersCreateViewController: UITableViewController, G2SClientDelegate {
+class GroupCreateMembersTableViewController: UITableViewController, G2SClientDelegate {
 
     @IBOutlet weak var buttonSave: UIBarButtonItem!
     
@@ -36,6 +36,7 @@ class GroupMembersCreateViewController: UITableViewController, G2SClientDelegate
         super.viewDidLoad()
         
         title = "Choose Members: \(groupName!)"
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         
         g2sClient.delegate = self
         
@@ -48,10 +49,6 @@ class GroupMembersCreateViewController: UITableViewController, G2SClientDelegate
     }
     
     // MARK: - UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if studentsFetchedResultsController.sections?.count > 0 {
@@ -97,35 +94,21 @@ class GroupMembersCreateViewController: UITableViewController, G2SClientDelegate
     @IBAction func buttonSaveTouched(sender: UIBarButtonItem) {
         buttonSave.enabled = false
         
-        let group = NSEntityDescription.insertNewObjectForEntityForName("Group", inManagedObjectContext: managedObjectContext) as! Group
+        var group = [String:String]()
+        group["name"] = groupName
+        group["pcnlist"] = ""
         
-        group.name = groupName
-        group.users = NSSet(array: groupMembers)
-        
-        do {
-            try managedObjectContext.save()
-            
-            var jsonGroup = [String:String]()
-            jsonGroup["name"] = group.name
-            jsonGroup["pcnlist"] = ""
-            
-            for user in groupMembers {
-                jsonGroup["pcnlist"] = jsonGroup["pcnlist"]! + user.pcn! + ","
-            }
-            
-            do {
-                try g2sClient.postGroup(JSON(jsonGroup).rawData())
-            } catch {
-                buttonSave.enabled = true
-                let nserror = error as NSError
-                print("POST error \(nserror), \(nserror.userInfo)")
-            }
-            
-        } catch {
-            let nserror = error as NSError
-            print("Save error \(nserror), \(nserror.userInfo)")
+        for user in groupMembers {
+            group["pcnlist"] = group["pcnlist"]! + user.pcn! + ","
         }
         
+        do {
+            try g2sClient.postGroup(JSON(group).rawData())
+        } catch {
+            buttonSave.enabled = true
+            let nserror = error as NSError
+            print("POST error \(nserror), \(nserror.userInfo)")
+        }
     }
     
     
