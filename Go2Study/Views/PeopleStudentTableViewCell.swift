@@ -16,9 +16,11 @@ class PeopleStudentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        photo.layer.cornerRadius = 4
-        photo.clipsToBounds = true
         photo.backgroundColor = UIColor.whiteColor()
+        photo.clipsToBounds   = true
+        photo.layer.cornerRadius = 4
+        photo.layer.borderColor  = UIColor.groupTableViewBackgroundColor().CGColor
+        photo.layer.borderWidth  = 1
     }
 }
 
