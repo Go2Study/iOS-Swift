@@ -23,15 +23,10 @@ import Foundation
 
 @objc class FontysClient : NSObject {
     
-    // MARK: - Constants
-    
-    private let ClientID    = "i271628-go2study-implicit"
-    private let Scopes      = "fhict+fhict_personal+fhict_location"
-    private let CallbackURL = "go2study://oauth/authorize"
-    private let apiBaseURL  = NSURL(string: "https://tas.fhict.nl:443/api/v1/")
-    
-    
-    // MARK: - Properties
+    let ClientID    = "i271628-go2study-implicit"
+    let Scopes      = "fhict+fhict_personal+fhict_location"
+    let CallbackURL = "go2study://oauth/authorize"
+    let apiBaseURL  = NSURL(string: "https://tas.fhict.nl:443/api/v1/")
     
     var delegate: FontysClientDelegate?
     
@@ -41,7 +36,7 @@ import Foundation
         }
     }
     
-     private(set) var accessToken: String? {
+     var accessToken: String? {
         get {
             return NSUserDefaults.standardUserDefaults().valueForKey("fhictAccessToken") as? String
         }
@@ -74,9 +69,62 @@ import Foundation
     }
     
     
-    // MARK: - Config
+    // MARK: - Users
     
-    private func getSessionAndRequest(endpoint: String, HTTPMethod: String) -> (session: NSURLSession, request: NSMutableURLRequest) {
+    func getUsers() {
+        let config = configure("people?includeThumbs=true", HTTPMethod: "GET")
+        
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
+            if error != nil {
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            } else {
+                self.delegate!.fontysClient?(self, didGetUsersData: data!)
+            }
+        }.resume()
+    }
+    
+    func getUser(pcn: String) {
+        let config = configure("people/\(pcn)", HTTPMethod: "GET")
+        
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
+            if error != nil {
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            } else {
+                self.delegate!.fontysClient?(self, didGetUserData: data, forPCN: pcn)
+            }
+        }.resume()
+    }
+    
+    
+    // MARK: - Images
+    
+    func getImage(pcn: String) {
+        let config = configure("pictures/\(pcn)/medium", HTTPMethod: "GET")
+        
+        config.session.downloadTaskWithRequest(config.request) { (url, response, error) -> Void in
+            if error != nil {
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            } else {
+                let data = NSData(contentsOfURL: url!)
+                self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
+            }
+        }.resume()
+    }
+
+}
+
+
+// MARK: - Private
+
+private extension FontysClient {
+    
+    func configure(endpoint: String, HTTPMethod: String) -> (session: NSURLSession, request: NSMutableURLRequest) {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = ["Authorization": "Bearer \(accessToken!)"]
         let session = NSURLSession(configuration: configuration, delegate: nil, delegateQueue: NSOperationQueue.mainQueue())
@@ -88,55 +136,4 @@ import Foundation
         return (session, request)
     }
     
-    
-    // MARK: - Users
-    
-    func getUsers() {
-        let requestData = getSessionAndRequest("people?includeThumbs=true", HTTPMethod: "GET")
-        
-        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
-            if error != nil {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
-            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else {
-                self.delegate!.fontysClient?(self, didGetUsersData: data!)
-            }
-        }
-        task.resume()
-    }
-    
-    func getUser(pcn: String) {
-        let requestData = getSessionAndRequest("people/\(pcn)", HTTPMethod: "GET")
-        
-        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
-            if error != nil {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
-            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else {
-                self.delegate!.fontysClient?(self, didGetUserData: data, forPCN: pcn)
-            }
-        }
-        task.resume()
-    }
-    
-    
-    // MARK: - Images
-    
-    func getImage(pcn: String) {
-        let requestData = getSessionAndRequest("pictures/\(pcn)/medium", HTTPMethod: "GET")
-        let task = requestData.session.downloadTaskWithRequest(requestData.request) { (url, response, error) -> Void in
-            if error != nil {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
-            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else {
-                let data = NSData(contentsOfURL: url!)
-                self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
-            }
-        }
-        task.resume()
-    }
-
 }

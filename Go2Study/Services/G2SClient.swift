@@ -25,132 +25,120 @@ import Foundation
 
 @objc class G2SClient: NSObject {
 
-    // MARK: - Constants
-    
-    private let apiBaseURL = NSURL(string: "http://go2study.lol/api/")
-    
-    
-    // MARK: - Properties
-    
     var delegate: G2SClientDelegate?
-    
-    
-    // MARK: - Config
-    
-    private func getSessionAndRequest(endpoint: String, HTTPMethod: String) -> (session: NSURLSession, request: NSMutableURLRequest) {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: configuration)
-        
-        let url = NSURL(string: endpoint, relativeToURL: apiBaseURL)
-        let request = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = HTTPMethod
-        
-        return (session, request)
-    }
+    let apiBaseURL = NSURL(string: "http://go2study.lol/api/")
     
     
     // MARK: - Users
     
     func getUsers() {
-        let requestData = getSessionAndRequest("users", HTTPMethod: "GET")
+        let config = configure("users", HTTPMethod: "GET")
         
-        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didGetUsersData: data!)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     func getUser(pcn: String) {
-        let requestData = getSessionAndRequest("users/\(pcn)", HTTPMethod: "GET")
+        let config = configure("users/\(pcn)", HTTPMethod: "GET")
         
-        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didGetUserData: data!, forPCN: pcn)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     func postUser(data: NSData) {
-        let requestData = getSessionAndRequest("users", HTTPMethod: "POST")
-        let request = requestData.request
+        let config = configure("users", HTTPMethod: "POST")
+        let request = config.request
         request.HTTPBody = data
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let task = requestData.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+        config.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didPostUserWithResponse: data!)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     func putUser(pcn: String, data: NSData) {
-        let requestData = getSessionAndRequest("users/\(pcn)", HTTPMethod: "PUT")
-        let request = requestData.request
+        let config = configure("users/\(pcn)", HTTPMethod: "PUT")
+        let request = config.request
         request.HTTPBody = data
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let task = requestData.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+        config.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didPutUserWithResponse: data!, forPCN: pcn)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     
     // MARK: - Groups
     
     func getGroups() {
-        let requestData = getSessionAndRequest("groups", HTTPMethod: "GET")
+        let config = configure("groups", HTTPMethod: "GET")
         
-        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didGetGroupsData: data!)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     func postGroup(data: NSData) {
-        let requestData = getSessionAndRequest("groups", HTTPMethod: "POST")
-        let request = requestData.request
+        let config = configure("groups", HTTPMethod: "POST")
+        let request = config.request
         request.HTTPBody = data
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let task = requestData.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+        config.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didPostGroupWithResponse: data!)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     func deleteGroup(id: Int32) {
-        let requestData = getSessionAndRequest("groups/\(id)", HTTPMethod: "DELETE")
+        let config = configure("groups/\(id)", HTTPMethod: "DELETE")
         
-        let task = requestData.session.dataTaskWithRequest(requestData.request) { (data, response, error) -> Void in
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
             if error == nil {
                 self.delegate!.g2sClient?(self, didDeleteGroup: id)
             } else {
                 self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
-        }
-        task.resume()
+        }.resume()
     }
+}
+
+
+// MARK: - Private
+
+private extension G2SClient {
+    
+    func configure(endpoint: String, HTTPMethod: String) -> (session: NSURLSession, request: NSMutableURLRequest) {
+        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        
+        let url = NSURL(string: endpoint, relativeToURL: apiBaseURL)
+        let request = NSMutableURLRequest(URL: url!)
+        request.HTTPMethod = HTTPMethod
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        return (session, request)
+    }
+    
 }
