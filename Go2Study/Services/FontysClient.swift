@@ -19,6 +19,9 @@ import Foundation
     
     // Images
     optional func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String)
+    
+    // Schedule
+    optional func fontysClient(client: FontysClient, didGetSchedule schedule: NSData?, forKind kind: String, query: String)
 }
 
 @objc class FontysClient : NSObject {
@@ -113,6 +116,24 @@ import Foundation
             } else {
                 let data = NSData(contentsOfURL: url!)
                 self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
+            }
+        }.resume()
+    }
+    
+    
+    // MARK: - Schedule
+    
+    func getSchedule(kind: String, query: String) {
+        let config = configure("schedule/\(kind)/\(query)", HTTPMethod: "GET")
+        
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
+            if error != nil {
+                self.delegate!.fontysClient?(self, didFailWithError: error!)
+            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            } else {
+                
+                self.delegate!.fontysClient?(self, didGetSchedule: data, forKind: kind, query: query)
             }
         }.resume()
     }

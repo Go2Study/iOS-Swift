@@ -39,4 +39,14 @@ class PersonStaffTableViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "StaffShowCalendar" {
+            let calendarViewController = segue.destinationViewController as! CalendarTableViewController
+            calendarViewController.personalTitle = user?.personalTitle
+        }
+    }
+    
 }

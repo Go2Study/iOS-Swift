@@ -15,6 +15,7 @@
         <attribute name="mail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="office" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pcn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personalTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,6 +24,6 @@
     </entity>
     <elements>
         <element name="Group" positionX="-297" positionY="-18" width="128" height="105"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="238"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="255"/>
     </elements>
 </model>

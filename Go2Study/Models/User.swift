@@ -30,18 +30,19 @@ class User: NSManagedObject {
     class func insertStaff(dictionary: JSON, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> User {
         let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
         
-        user.firstName   = dictionary["givenName"].stringValue
-        user.lastName    = dictionary["surName"].stringValue
-        user.displayName = dictionary["displayName"].stringValue
-        user.initials    = dictionary["initials"].stringValue
-        user.mail        = dictionary["mail"].stringValue
-        user.office      = dictionary["office"].stringValue
-        user.phone       = dictionary["telephoneNumber"].stringValue
-        user.pcn         = dictionary["id"].stringValue
-        user.title       = dictionary["title"].stringValue
-        user.department  = dictionary["department"].stringValue
-        user.type        = "staff"
-        user.photo       = NSData(base64EncodedString: dictionary["thumbnailData"].stringValue, options: .IgnoreUnknownCharacters)
+        user.firstName     = dictionary["givenName"].stringValue
+        user.lastName      = dictionary["surName"].stringValue
+        user.displayName   = dictionary["displayName"].stringValue
+        user.initials      = dictionary["initials"].stringValue
+        user.mail          = dictionary["mail"].stringValue
+        user.office        = dictionary["office"].stringValue
+        user.phone         = dictionary["telephoneNumber"].stringValue
+        user.pcn           = dictionary["id"].stringValue
+        user.title         = dictionary["title"].stringValue
+        user.department    = dictionary["department"].stringValue
+        user.type          = "staff"
+        user.photo         = NSData(base64EncodedString: dictionary["thumbnailData"].stringValue, options: .IgnoreUnknownCharacters)
+        user.personalTitle = dictionary["personalTitle"].stringValue
         
         return user
     }

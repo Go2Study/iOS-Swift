@@ -15,6 +15,8 @@
 		7546D7761C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546D7751C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift */; };
 		75B3A8271C0D355A007B02FE /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */; };
 		75B3A8281C0D355A007B02FE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8261C0D355A007B02FE /* Group.swift */; };
+		75D1DB5B1C158509005B9BC2 /* CalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D1DB5A1C158509005B9BC2 /* CalendarTableViewController.m */; };
+		75D1DB5D1C15A005005B9BC2 /* CalendarEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D1DB5C1C15A005005B9BC2 /* CalendarEventCell.swift */; };
 		75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */; };
 		75DF363C1C0B91F500A9B5E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75DF363A1C0B91F500A9B5E6 /* Main.storyboard */; };
 		75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75DF363D1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld */; };
@@ -61,6 +63,10 @@
 		7546D7751C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreateMembersTableViewController.swift; sourceTree = "<group>"; };
 		75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75B3A8261C0D355A007B02FE /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		75D1DB581C158508005B9BC2 /* Go2Study-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Go2Study-Bridging-Header.h"; path = "Controllers/Go2Study-Bridging-Header.h"; sourceTree = "<group>"; };
+		75D1DB591C158509005B9BC2 /* CalendarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewController.h; sourceTree = "<group>"; };
+		75D1DB5A1C158509005B9BC2 /* CalendarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewController.m; sourceTree = "<group>"; };
+		75D1DB5C1C15A005005B9BC2 /* CalendarEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventCell.swift; sourceTree = "<group>"; };
 		75DF36331C0B91F400A9B5E6 /* Go2Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Go2Study.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75DF363B1C0B91F500A9B5E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,6 +141,15 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		75D1DB571C1584DF005B9BC2 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				75D1DB591C158509005B9BC2 /* CalendarTableViewController.h */,
+				75D1DB5A1C158509005B9BC2 /* CalendarTableViewController.m */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
 		75DF362A1C0B91F400A9B5E6 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +179,7 @@
 				75E8D9AD1C0B941B009B5E7B /* Services */,
 				75E8D9B31C0B9F5F009B5E7B /* Views */,
 				75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */,
+				75D1DB581C158508005B9BC2 /* Go2Study-Bridging-Header.h */,
 				75DF363A1C0B91F500A9B5E6 /* Main.storyboard */,
 				75DF54241C0F6D94004DC8A7 /* People.storyboard */,
 				75DF36401C0B91F500A9B5E6 /* Assets.xcassets */,
@@ -195,6 +211,7 @@
 		75E8D9AA1C0B92AB009B5E7B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				75D1DB571C1584DF005B9BC2 /* Calendar */,
 				75D1DB561C1509E1005B9BC2 /* Login */,
 				75D1DB551C1509D1005B9BC2 /* People */,
 			);
@@ -216,6 +233,7 @@
 				75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */,
 				75E8D9B61C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift */,
 				75E8D9B81C0BA2B1009B5E7B /* PeopleGroupViewCell.swift */,
+				75D1DB5C1C15A005005B9BC2 /* CalendarEventCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -393,12 +411,14 @@
 				7546D7741C0ECC3100B4DB98 /* GroupCreateViewController.swift in Sources */,
 				75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */,
 				7546D7761C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift in Sources */,
+				75D1DB5B1C158509005B9BC2 /* CalendarTableViewController.m in Sources */,
 				75E8D9B71C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift in Sources */,
 				750B2BA81C0CE50700945A91 /* G2SClient.swift in Sources */,
 				750B2BA61C0CCC1500945A91 /* PersonStaffTableViewController.swift in Sources */,
 				75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */,
 				75E8D9B91C0BA2B1009B5E7B /* PeopleGroupViewCell.swift in Sources */,
 				75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */,
+				75D1DB5D1C15A005005B9BC2 /* CalendarEventCell.swift in Sources */,
 				75E8D9BE1C0BAFE0009B5E7B /* User.swift in Sources */,
 				75E8D9BD1C0BAFE0009B5E7B /* User+CoreDataProperties.swift in Sources */,
 				75B3A8271C0D355A007B02FE /* Group+CoreDataProperties.swift in Sources */,
@@ -552,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -561,6 +582,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lol.go2study.Go2Study;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Go2Study/Controllers/Go2Study-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -568,6 +591,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -577,6 +601,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lol.go2study.Go2Study;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Go2Study/Controllers/Go2Study-Bridging-Header.h";
 			};
 			name = Release;
 		};
