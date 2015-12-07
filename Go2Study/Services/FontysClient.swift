@@ -124,7 +124,7 @@ import Foundation
     // MARK: - Schedule
     
     func getSchedule(kind: String, query: String) {
-        let config = configure("schedule/\(kind)/\(query)", HTTPMethod: "GET")
+        let config = configure("schedule/\(kind)/\(query)?days=30", HTTPMethod: "GET")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
             if error != nil {
