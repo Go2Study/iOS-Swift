@@ -113,6 +113,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75D1DB551C1509D1005B9BC2 /* People */ = {
+			isa = PBXGroup;
+			children = (
+				75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */,
+				750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */,
+				750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */,
+				7546D7731C0ECC3100B4DB98 /* GroupNameViewController.swift */,
+				7546D7751C0ECC4500B4DB98 /* GroupMembersCreateTableViewController.swift */,
+				75DF54201C0F6604004DC8A7 /* GroupTableViewController.swift */,
+				75DF54221C0F6633004DC8A7 /* GroupMembersListTableViewController.swift */,
+			);
+			name = People;
+			sourceTree = "<group>";
+		};
+		75D1DB561C1509E1005B9BC2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		75DF362A1C0B91F400A9B5E6 = {
 			isa = PBXGroup;
 			children = (
@@ -173,14 +195,8 @@
 		75E8D9AA1C0B92AB009B5E7B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */,
-				75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */,
-				750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */,
-				750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */,
-				7546D7731C0ECC3100B4DB98 /* GroupNameViewController.swift */,
-				7546D7751C0ECC4500B4DB98 /* GroupMembersCreateTableViewController.swift */,
-				75DF54201C0F6604004DC8A7 /* GroupTableViewController.swift */,
-				75DF54221C0F6633004DC8A7 /* GroupMembersListTableViewController.swift */,
+				75D1DB561C1509E1005B9BC2 /* Login */,
+				75D1DB551C1509D1005B9BC2 /* People */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

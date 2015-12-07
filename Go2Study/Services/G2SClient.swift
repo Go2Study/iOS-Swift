@@ -93,6 +93,22 @@ import Foundation
         task.resume()
     }
     
+    func putUser(pcn: String, data: NSData) {
+        let requestData = getSessionAndRequest("users/\(pcn)", HTTPMethod: "PUT")
+        let request = requestData.request
+        request.HTTPBody = data
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = requestData.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            if error == nil {
+                self.delegate!.g2sClient?(self, didPutUserWithResponse: data!, forPCN: pcn)
+            } else {
+                self.delegate!.g2sClient?(self, didFailWithError: error!)
+            }
+        }
+        task.resume()
+    }
+    
     
     // MARK: - Groups
     

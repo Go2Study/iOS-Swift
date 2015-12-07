@@ -22,6 +22,7 @@ class User: NSManagedObject {
         user.mail        = dictionary["email"].stringValue
         user.pcn         = dictionary["pcn"].stringValue
         user.type        = "student"
+        user.photo       = NSData(base64EncodedString: dictionary["photo"].stringValue, options: .IgnoreUnknownCharacters)
         
         return user
     }
@@ -40,7 +41,7 @@ class User: NSManagedObject {
         user.title       = dictionary["title"].stringValue
         user.department  = dictionary["department"].stringValue
         user.type        = "staff"
-        user.photo       = NSData(base64EncodedString: dictionary["thumbnailData"].stringValue, options: NSDataBase64DecodingOptions(rawValue: 0))
+        user.photo       = NSData(base64EncodedString: dictionary["thumbnailData"].stringValue, options: .IgnoreUnknownCharacters)
         
         return user
     }

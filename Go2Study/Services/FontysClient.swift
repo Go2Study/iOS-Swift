@@ -50,6 +50,7 @@ import Foundation
         }
     }
     
+    
     // MARK: - OAuth
     
     func saveAccessToken(url: NSURL) {
@@ -124,7 +125,7 @@ import Foundation
     // MARK: - Images
     
     func getImage(pcn: String) {
-        let requestData = getSessionAndRequest("pictures/\(pcn)/large", HTTPMethod: "GET")
+        let requestData = getSessionAndRequest("pictures/\(pcn)/medium", HTTPMethod: "GET")
         let task = requestData.session.downloadTaskWithRequest(requestData.request) { (url, response, error) -> Void in
             if error != nil {
                 self.delegate!.fontysClient?(self, didFailWithError: error!)

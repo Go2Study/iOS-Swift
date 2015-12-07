@@ -70,11 +70,25 @@ extension FontysOAuthViewController: FontysClientDelegate {
         user["pcn"]       = json["id"].stringValue
         user["email"]     = json["mail"].stringValue
         
+        fontysClient.getImage(user["pcn"]!)
+        
         do {
             try g2sClient.postUser(JSON(user).rawData())
         } catch {
             let nserror = error as NSError
             print("POST error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    func fontysClient(client: FontysClient, didGetUserImage data: NSData?, forPCN pcn: String) {
+        var user = [String:String]()
+        user["photo"] = data?.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        
+        do {
+            try g2sClient.putUser(pcn, data: JSON(user).rawData())
+        } catch {
+            let nserror = error as NSError
+            print("PUT error \(nserror), \(nserror.userInfo)")
         }
     }
     

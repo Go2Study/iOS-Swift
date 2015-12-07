@@ -57,38 +57,6 @@
             </objects>
             <point key="canvasLocation" x="1623" y="357"/>
         </scene>
-        <!--Recent Activity-->
-        <scene sceneID="Jsh-yi-TMf">
-            <objects>
-                <tableViewController id="xRL-73-frX" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="txK-Sm-AVY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FSO-dK-nIs">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FSO-dK-nIs" id="VG4-rW-bGB">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="xRL-73-frX" id="YgT-gh-sNX"/>
-                            <outlet property="delegate" destination="xRL-73-frX" id="bXB-P3-KMh"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Recent Activity" id="JOD-mh-Pbj"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nCx-LD-Bl4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2311" y="1063"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="IEL-pu-qbn">
             <objects>
@@ -191,24 +159,6 @@
             </objects>
             <point key="canvasLocation" x="1623" y="1758"/>
         </scene>
-        <!--Recent-->
-        <scene sceneID="mVY-Sq-kp2">
-            <objects>
-                <navigationController id="ebq-MB-fwD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recent" image="TabBarRecent" selectedImage="TabBarRecentFilled" id="s2K-ul-zkc"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hnh-Ey-8jt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="xRL-73-frX" kind="relationship" relationship="rootViewController" id="3pR-uE-Vfk"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pdm-bc-3c3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1623" y="1063"/>
-        </scene>
         <!--People-->
         <scene sceneID="DYO-dR-Z6c">
             <objects>
@@ -273,7 +223,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="vlA-1e-nzS" kind="relationship" relationship="viewControllers" id="PHQ-aj-vv1"/>
-                        <segue destination="ebq-MB-fwD" kind="relationship" relationship="viewControllers" id="h4x-P1-xct"/>
                         <segue destination="aK4-ay-ZTb" kind="relationship" relationship="viewControllers" id="ZfY-1y-wyM"/>
                         <segue destination="7Vg-eW-0Eg" kind="relationship" relationship="viewControllers" id="0yF-PF-KpC"/>
                         <segue destination="4kV-8v-FNX" kind="relationship" relationship="viewControllers" id="cqQ-cx-790"/>
@@ -301,8 +250,6 @@
         <image name="TabBarMessagesFilled" width="25" height="25"/>
         <image name="TabBarPeople" width="25" height="25"/>
         <image name="TabBarPeopleFilled" width="25" height="25"/>
-        <image name="TabBarRecent" width="25" height="25"/>
-        <image name="TabBarRecentFilled" width="25" height="25"/>
         <image name="TabBarSettings" width="25" height="25"/>
         <image name="TabBarSettingsFilled" width="25" height="25"/>
     </resources>
