@@ -119,7 +119,7 @@ class GroupCreateMembersTableViewController: UITableViewController, G2SClientDel
         buttonSave.enabled = true
     }
     
-    func g2sClient(client: G2SClient, didPostGroupWithResponse response: NSData?) {
+    func g2sClient(client: G2SClient, didPostGroupWithResponse response: NSData) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.navigationController?.popToRootViewControllerAnimated(true)
         }

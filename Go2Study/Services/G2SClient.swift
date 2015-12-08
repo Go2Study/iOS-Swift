@@ -12,14 +12,14 @@ import Foundation
     optional func g2sClient(client: G2SClient, didFailWithError error: NSError)
     
     // Users
-    optional func g2sClient(client: G2SClient, didGetUsersData data: NSData?)
-    optional func g2sClient(client: G2SClient, didGetUserData data: NSData?, forPCN pcn: String)
-    optional func g2sClient(client: G2SClient, didPostUserWithResponse response: NSData?)
-    optional func g2sClient(client: G2SClient, didPutUserWithResponse response: NSData?, forPCN pcn: String)
+    optional func g2sClient(client: G2SClient, didGetUsersData data: NSData)
+    optional func g2sClient(client: G2SClient, didGetUserData data: NSData, forPCN pcn: String)
+    optional func g2sClient(client: G2SClient, didPostUserWithResponse response: NSData)
+    optional func g2sClient(client: G2SClient, didPutUserWithResponse response: NSData, forPCN pcn: String)
     
     // Groups
-    optional func g2sClient(client: G2SClient, didGetGroupsData data: NSData?)
-    optional func g2sClient(client: G2SClient, didPostGroupWithResponse response: NSData?)
+    optional func g2sClient(client: G2SClient, didGetGroupsData data: NSData)
+    optional func g2sClient(client: G2SClient, didPostGroupWithResponse response: NSData)
     optional func g2sClient(client: G2SClient, didDeleteGroup id: Int32)
 }
 
@@ -35,10 +35,8 @@ import Foundation
         let config = configure("users", HTTPMethod: "GET")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
-            if error == nil {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.g2sClient?(self, didGetUsersData: data!)
-            } else {
-                self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
         }.resume()
     }
@@ -47,10 +45,8 @@ import Foundation
         let config = configure("users/\(pcn)", HTTPMethod: "GET")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
-            if error == nil {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.g2sClient?(self, didGetUserData: data!, forPCN: pcn)
-            } else {
-                self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
         }.resume()
     }
@@ -61,10 +57,8 @@ import Foundation
         request.HTTPBody = data
         
         config.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-            if error == nil {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.g2sClient?(self, didPostUserWithResponse: data!)
-            } else {
-                self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
         }.resume()
     }
@@ -75,10 +69,8 @@ import Foundation
         request.HTTPBody = data
         
         config.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-            if error == nil {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.g2sClient?(self, didPutUserWithResponse: data!, forPCN: pcn)
-            } else {
-                self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
         }.resume()
     }
@@ -90,10 +82,8 @@ import Foundation
         let config = configure("groups", HTTPMethod: "GET")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
-            if error == nil {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.g2sClient?(self, didGetGroupsData: data!)
-            } else {
-                self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
         }.resume()
     }
@@ -104,10 +94,8 @@ import Foundation
         request.HTTPBody = data
         
         config.session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-            if error == nil {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.g2sClient?(self, didPostGroupWithResponse: data!)
-            } else {
-                self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
         }.resume()
     }
@@ -116,10 +104,8 @@ import Foundation
         let config = configure("groups/\(id)", HTTPMethod: "DELETE")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
-            if error == nil {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.g2sClient?(self, didDeleteGroup: id)
-            } else {
-                self.delegate!.g2sClient?(self, didFailWithError: error!)
             }
         }.resume()
     }
@@ -139,6 +125,15 @@ private extension G2SClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         return (session, request)
+    }
+    
+    func checkResponse(response: NSURLResponse?, forError error: NSError?) -> Bool {
+        if error != nil {
+            delegate!.g2sClient?(self, didFailWithError: error!)
+            return false
+        }
+        
+        return true
     }
     
 }

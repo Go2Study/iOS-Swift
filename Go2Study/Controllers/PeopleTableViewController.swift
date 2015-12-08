@@ -200,10 +200,10 @@ extension PeopleTableViewController: G2SClientDelegate {
         print("Request error \(error), \(error.userInfo)")
     }
     
-    func g2sClient(client: G2SClient, didGetUsersData data: NSData?) {
+    func g2sClient(client: G2SClient, didGetUsersData data: NSData) {
         deleteData()
         
-        for (_, userDictionary) in JSON(data: data!) {
+        for (_, userDictionary) in JSON(data: data) {
             User.insertStudent(userDictionary, inManagedObjectContext: managedObjectContext)
         }
         
@@ -212,10 +212,10 @@ extension PeopleTableViewController: G2SClientDelegate {
         refreshControl!.endRefreshing()
     }
     
-    func g2sClient(client: G2SClient, didGetGroupsData data: NSData?) {
+    func g2sClient(client: G2SClient, didGetGroupsData data: NSData) {
         deleteData()
         
-        for (_, groupDictionary) in JSON(data: data!) {
+        for (_, groupDictionary) in JSON(data: data) {
             Group.insert(groupDictionary, inManagedObjectContext: managedObjectContext)
         }
         

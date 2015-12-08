@@ -22,6 +22,7 @@ import Foundation
     
     // Schedule
     optional func fontysClient(client: FontysClient, didGetSchedule schedule: NSData?, forKind kind: String, query: String)
+    optional func fontysClient(client: FontysClient, didGetAutocompleteData data: NSData?, forKind kind: String)
 }
 
 @objc class FontysClient : NSObject {
@@ -78,11 +79,7 @@ import Foundation
         let config = configure("people?includeThumbs=true", HTTPMethod: "GET")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
-            if error != nil {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
-            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.fontysClient?(self, didGetUsersData: data!)
             }
         }.resume()
@@ -92,11 +89,7 @@ import Foundation
         let config = configure("people/\(pcn)", HTTPMethod: "GET")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
-            if error != nil {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
-            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else {
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.fontysClient?(self, didGetUserData: data, forPCN: pcn)
             }
         }.resume()
@@ -109,11 +102,7 @@ import Foundation
         let config = configure("pictures/\(pcn)/medium", HTTPMethod: "GET")
         
         config.session.downloadTaskWithRequest(config.request) { (url, response, error) -> Void in
-            if error != nil {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
-            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else {
+            if self.checkResponse(response, forError: error) {
                 let data = NSData(contentsOfURL: url!)
                 self.delegate!.fontysClient?(self, didGetUserImage: data, forPCN: pcn)
             }
@@ -127,13 +116,18 @@ import Foundation
         let config = configure("schedule/\(kind)/\(query)?days=30", HTTPMethod: "GET")
         
         config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
-            if error != nil {
-                self.delegate!.fontysClient?(self, didFailWithError: error!)
-            } else if (response as! NSHTTPURLResponse).statusCode == 401 {
-                self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
-            } else {
-                
+            if self.checkResponse(response, forError: error) {
                 self.delegate!.fontysClient?(self, didGetSchedule: data, forKind: kind, query: query)
+            }
+        }.resume()
+    }
+    
+    func getAutocomplete(kind: String) {
+        let config = configure("schedule/autocomplete/\(kind)", HTTPMethod: "GET")
+        
+        config.session.dataTaskWithRequest(config.request) { (data, response, error) -> Void in
+            if self.checkResponse(response, forError: error) {
+                self.delegate!.fontysClient?(self, didGetAutocompleteData: data, forKind: kind)
             }
         }.resume()
     }
@@ -155,6 +149,18 @@ private extension FontysClient {
         request.HTTPMethod = HTTPMethod
         
         return (session, request)
+    }
+    
+    func checkResponse(response: NSURLResponse?, forError error: NSError?) -> Bool {
+        if error != nil {
+            self.delegate!.fontysClient?(self, didFailWithError: error!)
+            return false
+        } else if (response as! NSHTTPURLResponse).statusCode == 401 {
+            self.delegate!.fontysClient?(self, didFailWithOAuthError: 401)
+            return false
+        }
+        
+        return true
     }
     
 }
