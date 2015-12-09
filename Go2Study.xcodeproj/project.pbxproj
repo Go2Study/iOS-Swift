@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7506C7771C179D2600EEF92D /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506C7761C179D2600EEF92D /* PeopleViewController.swift */; };
+		7506C77A1C179F6400EEF92D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506C7791C179F6400EEF92D /* UIImage.swift */; };
+		7506C77D1C17A17E00EEF92D /* ManagedObjectContextSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506C77C1C17A17E00EEF92D /* ManagedObjectContextSettable.swift */; };
+		7506C77F1C17A3B500EEF92D /* PeopleUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506C77E1C17A3B500EEF92D /* PeopleUserTableViewCell.swift */; };
 		750B2B651C0C7A8F00945A91 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 750B2B641C0C7A8F00945A91 /* SwiftyJSON.framework */; };
 		750B2BA61C0CCC1500945A91 /* PersonStaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */; };
 		750B2BA81C0CE50700945A91 /* G2SClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA71C0CE50700945A91 /* G2SClient.swift */; };
 		750B2BAA1C0CFF9900945A91 /* PersonStudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */; };
 		7546D7741C0ECC3100B4DB98 /* GroupCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546D7731C0ECC3100B4DB98 /* GroupCreateViewController.swift */; };
 		7546D7761C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546D7751C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift */; };
+		756749801C17B3BD00DEADC6 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567497F1C17B3BD00DEADC6 /* RootTabBarController.swift */; };
 		75B3A8271C0D355A007B02FE /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */; };
 		75B3A8281C0D355A007B02FE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8261C0D355A007B02FE /* Group.swift */; };
 		75D1DB5B1C158509005B9BC2 /* CalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D1DB5A1C158509005B9BC2 /* CalendarTableViewController.m */; };
@@ -27,7 +32,7 @@
 		75DF54211C0F6604004DC8A7 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF54201C0F6604004DC8A7 /* GroupTableViewController.swift */; };
 		75DF54231C0F6633004DC8A7 /* GroupMembersListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF54221C0F6633004DC8A7 /* GroupMembersListTableViewController.swift */; };
 		75DF54261C0F6D94004DC8A7 /* People.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75DF54241C0F6D94004DC8A7 /* People.storyboard */; };
-		75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */; };
+		75E8D9AC1C0B9348009B5E7B /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AB1C0B9348009B5E7B /* WelcomeViewController.swift */; };
 		75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */; };
 		75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */; };
 		75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */; };
@@ -55,12 +60,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7506C7761C179D2600EEF92D /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; tabWidth = 5; };
+		7506C7791C179F6400EEF92D /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		7506C77C1C17A17E00EEF92D /* ManagedObjectContextSettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextSettable.swift; sourceTree = "<group>"; };
+		7506C77E1C17A3B500EEF92D /* PeopleUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleUserTableViewCell.swift; sourceTree = "<group>"; };
 		750B2B641C0C7A8F00945A91 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		750B2BA51C0CCC1500945A91 /* PersonStaffTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonStaffTableViewController.swift; sourceTree = "<group>"; };
 		750B2BA71C0CE50700945A91 /* G2SClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = G2SClient.swift; sourceTree = "<group>"; };
 		750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonStudentTableViewController.swift; sourceTree = "<group>"; };
 		7546D7731C0ECC3100B4DB98 /* GroupCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreateViewController.swift; sourceTree = "<group>"; };
 		7546D7751C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreateMembersTableViewController.swift; sourceTree = "<group>"; };
+		7567497F1C17B3BD00DEADC6 /* RootTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75B3A8261C0D355A007B02FE /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		75D1DB581C158508005B9BC2 /* Go2Study-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Go2Study-Bridging-Header.h"; path = "Controllers/Go2Study-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -83,7 +93,7 @@
 		75DF54201C0F6604004DC8A7 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		75DF54221C0F6633004DC8A7 /* GroupMembersListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMembersListTableViewController.swift; sourceTree = "<group>"; };
 		75DF54251C0F6D94004DC8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/People.storyboard; sourceTree = "<group>"; };
-		75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysOAuthViewController.swift; sourceTree = "<group>"; };
+		75E8D9AB1C0B9348009B5E7B /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysClient.swift; sourceTree = "<group>"; };
 		75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
 		75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleStaffTableViewCell.swift; sourceTree = "<group>"; };
@@ -119,6 +129,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7506C7781C179F4300EEF92D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7506C7791C179F6400EEF92D /* UIImage.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7506C77B1C17A12D00EEF92D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7506C77C1C17A17E00EEF92D /* ManagedObjectContextSettable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		75D1DB551C1509D1005B9BC2 /* People */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +155,7 @@
 				7546D7751C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift */,
 				75DF54201C0F6604004DC8A7 /* GroupTableViewController.swift */,
 				75DF54221C0F6633004DC8A7 /* GroupMembersListTableViewController.swift */,
+				7506C7761C179D2600EEF92D /* PeopleViewController.swift */,
 			);
 			name = People;
 			sourceTree = "<group>";
@@ -136,7 +163,7 @@
 		75D1DB561C1509E1005B9BC2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */,
+				75E8D9AB1C0B9348009B5E7B /* WelcomeViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -175,7 +202,9 @@
 			isa = PBXGroup;
 			children = (
 				75E8D9AA1C0B92AB009B5E7B /* Controllers */,
+				7506C7781C179F4300EEF92D /* Extensions */,
 				75E8D9BA1C0BAFB4009B5E7B /* Models */,
+				7506C77B1C17A12D00EEF92D /* Protocols */,
 				75E8D9AD1C0B941B009B5E7B /* Services */,
 				75E8D9B31C0B9F5F009B5E7B /* Views */,
 				75DF36361C0B91F500A9B5E6 /* AppDelegate.swift */,
@@ -211,6 +240,7 @@
 		75E8D9AA1C0B92AB009B5E7B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7567497F1C17B3BD00DEADC6 /* RootTabBarController.swift */,
 				75D1DB571C1584DF005B9BC2 /* Calendar */,
 				75D1DB561C1509E1005B9BC2 /* Login */,
 				75D1DB551C1509D1005B9BC2 /* People */,
@@ -234,6 +264,7 @@
 				75E8D9B61C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift */,
 				75E8D9B81C0BA2B1009B5E7B /* PeopleGroupViewCell.swift */,
 				75D1DB5C1C15A005005B9BC2 /* CalendarEventCell.swift */,
+				7506C77E1C17A3B500EEF92D /* PeopleUserTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -403,14 +434,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */,
+				756749801C17B3BD00DEADC6 /* RootTabBarController.swift in Sources */,
 				75DF54231C0F6633004DC8A7 /* GroupMembersListTableViewController.swift in Sources */,
+				7506C77F1C17A3B500EEF92D /* PeopleUserTableViewCell.swift in Sources */,
 				750B2BAA1C0CFF9900945A91 /* PersonStudentTableViewController.swift in Sources */,
-				75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */,
+				7506C7771C179D2600EEF92D /* PeopleViewController.swift in Sources */,
+				75E8D9AC1C0B9348009B5E7B /* WelcomeViewController.swift in Sources */,
 				75B3A8281C0D355A007B02FE /* Group.swift in Sources */,
 				75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */,
 				7546D7741C0ECC3100B4DB98 /* GroupCreateViewController.swift in Sources */,
 				75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */,
 				7546D7761C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift in Sources */,
+				7506C77D1C17A17E00EEF92D /* ManagedObjectContextSettable.swift in Sources */,
 				75D1DB5B1C158509005B9BC2 /* CalendarTableViewController.m in Sources */,
 				75E8D9B71C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift in Sources */,
 				750B2BA81C0CE50700945A91 /* G2SClient.swift in Sources */,
@@ -420,6 +455,7 @@
 				75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */,
 				75D1DB5D1C15A005005B9BC2 /* CalendarEventCell.swift in Sources */,
 				75E8D9BE1C0BAFE0009B5E7B /* User.swift in Sources */,
+				7506C77A1C179F6400EEF92D /* UIImage.swift in Sources */,
 				75E8D9BD1C0BAFE0009B5E7B /* User+CoreDataProperties.swift in Sources */,
 				75B3A8271C0D355A007B02FE /* Group+CoreDataProperties.swift in Sources */,
 				75DF54211C0F6604004DC8A7 /* GroupTableViewController.swift in Sources */,

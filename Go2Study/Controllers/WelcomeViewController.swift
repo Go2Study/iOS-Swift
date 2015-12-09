@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import SwiftyJSON
 
-class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegate {
+class WelcomeViewController: UIViewController, SFSafariViewControllerDelegate {
     
     var fontysClient = FontysClient()
     var g2sClient = G2SClient()
@@ -18,11 +18,28 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
         return SFSafariViewController(URL: FontysClient().oauthURL)
     }()
     
+    lazy var buttonLogin: UIButton = {
+        let button = UIButton(type: .System)
+        button.setTitle("Login with FHICT", forState: .Normal)
+        button.titleLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        button.titleLabel!.textColor = UIColor.purpleColor()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.sizeToFit()
+        button.addTarget(self, action: Selector("buttonLoginTouched"), forControlEvents: .TouchUpInside)
+        return button
+    }()
+    
     
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        buttonLogin.titleLabel!.textColor = view.tintColor
+        
+        view.addSubview(buttonLogin)
+        
+        autolayout()
         
         fontysClient.delegate = self
         g2sClient.delegate = self
@@ -39,7 +56,7 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
     
     // MARK: - Actions
     
-    @IBAction func buttonLoginTouched() {
+    func buttonLoginTouched() {
         presentViewController(safariViewController, animated: true, completion: nil)
     }
     
@@ -55,7 +72,7 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
 
 // MARK: - FontysClientDelegate
 
-extension FontysOAuthViewController: FontysClientDelegate {
+extension WelcomeViewController: FontysClientDelegate {
     
     func fontysClient(client: FontysClient, didFailWithError error: NSError) {
         print("Request error \(error), \(error.userInfo)")
@@ -97,10 +114,26 @@ extension FontysOAuthViewController: FontysClientDelegate {
 
 // MARK: - G2SClientDelegate
 
-extension FontysOAuthViewController: G2SClientDelegate {
+extension WelcomeViewController: G2SClientDelegate {
     
     func g2sClient(client: G2SClient, didFailWithError error: NSError) {
         print("Request error \(error), \(error.userInfo)")
+    }
+    
+}
+
+
+// MARK: - Private
+
+private extension WelcomeViewController {
+    
+    func autolayout() {
+        let views = ["view": view,
+                     "buttonLogin": buttonLogin]
+        let loginButtonConstraintH = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[buttonLogin]-|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: views)
+        let loginButtonConstraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[buttonLogin]-|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: views)
+        view.addConstraints(loginButtonConstraintH)
+        view.addConstraints(loginButtonConstraintV)
     }
     
 }

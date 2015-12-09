@@ -8,35 +8,49 @@
 
 import UIKit
 
-class PeopleStaffTableViewCell: UITableViewCell {
+class PeopleStaffTableViewCell: PeopleUserTableViewCell {
 
-    @IBOutlet weak var photo: UIImageView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var office: UILabel!
+    var office: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        label.sizeToFit()
+        label.textColor = UIColor.grayColor()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        photo.backgroundColor = UIColor.whiteColor()
-        photo.clipsToBounds   = true
-        photo.layer.cornerRadius = 4
-        photo.layer.borderColor  = UIColor.groupTableViewBackgroundColor().CGColor
-        photo.layer.borderWidth  = 1
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(office)
+        
+        autolayout()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
-}
-
-extension PeopleStaffTableViewCell {
-    
-    func configure(user: User) {
-        name.text = user.displayName
+    override func configure(user: User) {
+        super.configure(user)
         office.text = user.office
-        
-        if let photo = user.photo {
-            self.photo.image = UIImage(data: photo)
-        } else {
-            self.photo.image = nil
-        }
     }
     
+    private func autolayout() {
+        let views = [
+            "contentView": contentView,
+            "name": name,
+            "office": office,
+            "photo": photo
+        ]
+        
+        let viewConstraintH = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[photo(46)]-8-[name(>=10)]-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: views)
+        let photoConstraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:|-9-[photo(46)]", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: views)
+        let viewConstraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:[name(21)]-6-[office]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: views)
+        
+        contentView.addConstraints(viewConstraintH)
+        contentView.addConstraints(photoConstraintV)
+        contentView.addConstraints(viewConstraintV)
+    }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Tfy-Dg-3JY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Tfy-Dg-3JY">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -13,7 +13,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="PGl-r9-oHr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="dataSource" destination="th6-BA-sPh" id="rGo-dO-9jh"/>
@@ -32,11 +31,10 @@
         <scene sceneID="9dc-Z0-Dz7">
             <objects>
                 <navigationController id="7Vg-eW-0Eg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Messages" image="TabBarMessages" selectedImage="TabBarMessagesFilled" id="bIF-nE-LvJ"/>
+                    <tabBarItem key="tabBarItem" title="Messages" image="TabBarMessages" selectedImage="TabBarMessagesSelected" id="bIF-nE-LvJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TOw-iK-03X">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="th6-BA-sPh" kind="relationship" relationship="rootViewController" id="UuJ-Mr-1u0"/>
@@ -53,7 +51,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aWf-eC-ltl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="dataSource" destination="Fjk-7r-pmg" id="jVw-iN-jjw"/>
@@ -73,7 +70,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="PMV-88-evw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CalendarEventCell" rowHeight="64" id="weF-kl-b1i" customClass="CalendarEventCell" customModule="Go2Study" customModuleProvider="target">
@@ -85,14 +81,12 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ze-o9-y4q">
                                             <rect key="frame" x="8" y="34" width="56" height="21"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ie-S5-jK1">
                                             <rect key="frame" x="8" y="8" width="43" height="21"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="nhj-VY-oDb"/>
                                             </constraints>
@@ -102,13 +96,11 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99:99" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIJ-5w-Aha">
                                             <rect key="frame" x="548" y="21" width="44" height="21"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="kIJ-5w-Aha" firstAttribute="top" secondItem="SXL-ho-DOg" secondAttribute="topMargin" constant="13" id="4Ax-wj-zCm"/>
                                         <constraint firstItem="kIJ-5w-Aha" firstAttribute="trailing" secondItem="SXL-ho-DOg" secondAttribute="trailingMargin" id="4Mf-as-csE"/>
@@ -120,7 +112,6 @@
                                         <constraint firstItem="2Ie-S5-jK1" firstAttribute="leading" secondItem="2Ze-o9-y4q" secondAttribute="leading" id="ulA-ue-vjK"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <animations/>
                                 <connections>
                                     <outlet property="location" destination="2Ze-o9-y4q" id="Hlr-ts-bKI"/>
                                     <outlet property="name" destination="2Ie-S5-jK1" id="2Ig-Vk-Mcx"/>
@@ -145,11 +136,10 @@
         <scene sceneID="opJ-zH-ONy">
             <objects>
                 <navigationController id="aK4-ay-ZTb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Calendar" image="TabBarCalendar" selectedImage="TabBarCalendarFilled" id="bph-Pu-JNf"/>
+                    <tabBarItem key="tabBarItem" title="Calendar" image="TabBarCalendar" selectedImage="TabBarCalendarSelected" id="bph-Pu-JNf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="67B-PK-DzQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="YnR-2j-ASw" kind="relationship" relationship="rootViewController" id="JMW-Kl-isi"/>
@@ -163,11 +153,10 @@
         <scene sceneID="rFX-4Y-qlL">
             <objects>
                 <navigationController id="4kV-8v-FNX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="TabBarSettings" selectedImage="TabBarSettingsFilled" id="5fR-EF-36g"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="TabBarSettings" selectedImage="TabBarSettingsSelected" id="5fR-EF-36g"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZJ7-NT-5xn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="Fjk-7r-pmg" kind="relationship" relationship="rootViewController" id="dH2-kC-TFa"/>
@@ -181,11 +170,10 @@
         <scene sceneID="DYO-dR-Z6c">
             <objects>
                 <navigationController id="vlA-1e-nzS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="People" image="TabBarPeople" selectedImage="TabBarPeopleFilled" id="hLN-Yb-pMM"/>
+                    <tabBarItem key="tabBarItem" title="People" image="TabBarPeople" selectedImage="TabBarPeopleSelected" id="hLN-Yb-pMM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WeL-Ru-3sd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="Jhb-eI-XNH" kind="relationship" relationship="rootViewController" id="9me-Uj-r3X"/>
@@ -195,40 +183,6 @@
             </objects>
             <point key="canvasLocation" x="1623" y="-357"/>
         </scene>
-        <!--Fontys OAuth View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="fontysOAuthViewController" title="Fontys OAuth View Controller" id="BYZ-38-t0r" customClass="FontysOAuthViewController" customModule="Go2Study" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IpP-qu-Xo3">
-                                <rect key="frame" x="238" y="284" width="124" height="32"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <state key="normal" title="Login with FHICT"/>
-                                <connections>
-                                    <action selector="buttonLoginTouched" destination="BYZ-38-t0r" eventType="touchUpInside" id="bLG-nQ-att"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="IpP-qu-Xo3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6v4-EZ-yRm"/>
-                            <constraint firstItem="IpP-qu-Xo3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xg8-ee-rS2"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="883" y="1769"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="d4J-3S-Ou7">
             <objects>
@@ -236,7 +190,6 @@
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="azH-TR-y95">
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
@@ -263,12 +216,12 @@
     </scenes>
     <resources>
         <image name="TabBarCalendar" width="25" height="25"/>
-        <image name="TabBarCalendarFilled" width="25" height="25"/>
+        <image name="TabBarCalendarSelected" width="25" height="25"/>
         <image name="TabBarMessages" width="25" height="25"/>
-        <image name="TabBarMessagesFilled" width="25" height="25"/>
+        <image name="TabBarMessagesSelected" width="25" height="25"/>
         <image name="TabBarPeople" width="25" height="25"/>
-        <image name="TabBarPeopleFilled" width="25" height="25"/>
+        <image name="TabBarPeopleSelected" width="25" height="25"/>
         <image name="TabBarSettings" width="25" height="25"/>
-        <image name="TabBarSettingsFilled" width="25" height="25"/>
+        <image name="TabBarSettingsSelected" width="25" height="25"/>
     </resources>
 </document>
