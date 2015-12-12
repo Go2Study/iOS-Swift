@@ -22,7 +22,6 @@ class PeopleStaffTableViewCell: PeopleUserTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(office)
         
         autolayout()
@@ -39,18 +38,13 @@ class PeopleStaffTableViewCell: PeopleUserTableViewCell {
     
     private func autolayout() {
         let views = [
-            "contentView": contentView,
             "name": name,
             "office": office,
             "photo": photo
         ]
         
-        let viewConstraintH = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[photo(46)]-8-[name(>=10)]-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: views)
-        let photoConstraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:|-9-[photo(46)]", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: views)
-        let viewConstraintV = NSLayoutConstraint.constraintsWithVisualFormat("V:[name(21)]-6-[office]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: views)
-        
-        contentView.addConstraints(viewConstraintH)
-        contentView.addConstraints(photoConstraintV)
-        contentView.addConstraints(viewConstraintV)
+        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[photo(46)]-8-[name(>=10)]-|", options: .AlignAllTop, metrics: nil, views: views))
+        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-9-[photo(46)]", options: .AlignAllBaseline, metrics: nil, views: views))
+        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[name(21)]-6-[office]", options: .AlignAllLeft, metrics: nil, views: views))
     }
 }

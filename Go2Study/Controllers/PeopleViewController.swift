@@ -42,11 +42,13 @@ class PeopleViewController: UIViewController {
     }()
     
     lazy var tableView: UITableView = {
-       let tableView = UITableView(frame: CGRectInset(self.view.bounds, 0, 0))
+        let tableView = UITableView(frame: CGRectZero)
         tableView.addSubview(self.refreshControl)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.registerClass(PeopleStaffTableViewCell.self, forCellReuseIdentifier: "PeopleStaffCell")
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -159,25 +161,21 @@ extension PeopleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch currentDisplay {
         case .Students :
-            let cell = tableView.dequeueReusableCellWithIdentifier("peopleStudentCell", forIndexPath: indexPath) as! PeopleStudentTableViewCell
-            let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as! User
-            
-            cell.configure(user)
-            return cell
+            break
             
         case .Staff:
-            let cell = PeopleStaffTableViewCell(style: .Default, reuseIdentifier: "PeopleStaffCell")
+            let cell = tableView.dequeueReusableCellWithIdentifier("PeopleStaffCell") as! PeopleStaffTableViewCell
             let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
+            
             cell.configure(user)
             cell.accessoryType = .DisclosureIndicator
             return cell
             
         case .Groups:
-            let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell", forIndexPath: indexPath) as! PeopleGroupViewCell
-            let group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as! Group
-            cell.configure(group)
-            return cell
+            break
         }
+        
+        return UITableViewCell()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -258,7 +256,12 @@ extension PeopleViewController: G2SClientDelegate {
 private extension PeopleViewController {
     
     func autolayout() {
+        let views = [
+            "tableView": tableView
+        ]
         
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: .AlignAllLeft, metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: .AlignAllLeft, metrics: nil, views: views))
     }
     
     @objc func refreshData() {
