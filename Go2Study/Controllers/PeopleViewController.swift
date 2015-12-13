@@ -47,6 +47,8 @@ class PeopleViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerClass(PeopleStaffTableViewCell.self, forCellReuseIdentifier: "PeopleStaffCell")
+        tableView.registerClass(PeopleStudentTableViewCell.self, forCellReuseIdentifier: "PeopleStudentCell")
+        tableView.registerClass(PeopleGroupViewCell.self, forCellReuseIdentifier: "PeopleGroupCell")
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -123,6 +125,8 @@ class PeopleViewController: UIViewController {
             currentDisplay = .Groups
             navigationItem.rightBarButtonItem = buttonCreateGroup
         }
+        
+        reloadTableView()
     }
     
     func buttonCreateGroupTouched() {
@@ -161,13 +165,18 @@ extension PeopleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch currentDisplay {
         case .Students :
-            break
+            let cell = tableView.dequeueReusableCellWithIdentifier("PeopleStudentCell") as! PeopleStudentTableViewCell
+            if let user = studentsFetchedResultsController.objectAtIndexPath(indexPath) as? User {
+                cell.configure(user)
+            }
+            cell.accessoryType = .DisclosureIndicator
+            return cell
             
         case .Staff:
             let cell = tableView.dequeueReusableCellWithIdentifier("PeopleStaffCell") as! PeopleStaffTableViewCell
-            let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as! User
-            
-            cell.configure(user)
+            if let user = staffFetchedResultsController.objectAtIndexPath(indexPath) as? User {
+                cell.configure(user)
+            }
             cell.accessoryType = .DisclosureIndicator
             return cell
             
@@ -200,7 +209,7 @@ extension PeopleViewController: FontysClientDelegate {
     func fontysClient(client: FontysClient, didGetUsersData data: NSData?) {
         deleteData()
         
-        for (_, userDictionary) in JSON(data: data!) {
+        for userDictionary in JSON(data: data!).arrayValue {
             User.insertStaff(userDictionary, inManagedObjectContext: managedObjectContext)
         }
         
@@ -228,7 +237,7 @@ extension PeopleViewController: G2SClientDelegate {
     func g2sClient(client: G2SClient, didGetUsersData data: NSData) {
         deleteData()
         
-        for (_, userDictionary) in JSON(data: data) {
+        for userDictionary in JSON(data: data).arrayValue {
             User.insertStudent(userDictionary, inManagedObjectContext: managedObjectContext)
         }
         
@@ -240,7 +249,7 @@ extension PeopleViewController: G2SClientDelegate {
     func g2sClient(client: G2SClient, didGetGroupsData data: NSData) {
         deleteData()
         
-        for (_, groupDictionary) in JSON(data: data) {
+        for groupDictionary in JSON(data: data).arrayValue {
             Group.insert(groupDictionary, inManagedObjectContext: managedObjectContext)
         }
         
