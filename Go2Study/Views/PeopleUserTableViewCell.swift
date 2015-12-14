@@ -34,6 +34,8 @@ class PeopleUserTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        separatorInset = UIEdgeInsetsMake(0, 70, 0, 0)
+        
         contentView.addSubview(name)
         contentView.addSubview(photo)
     }

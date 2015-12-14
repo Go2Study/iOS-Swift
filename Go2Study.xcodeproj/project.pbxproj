@@ -37,7 +37,7 @@
 		75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */; };
 		75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */; };
 		75E8D9B71C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B61C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift */; };
-		75E8D9B91C0BA2B1009B5E7B /* PeopleGroupViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B81C0BA2B1009B5E7B /* PeopleGroupViewCell.swift */; };
+		75E8D9B91C0BA2B1009B5E7B /* PeopleGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B81C0BA2B1009B5E7B /* PeopleGroupTableViewCell.swift */; };
 		75E8D9BD1C0BAFE0009B5E7B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9BB1C0BAFE0009B5E7B /* User+CoreDataProperties.swift */; };
 		75E8D9BE1C0BAFE0009B5E7B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9BC1C0BAFE0009B5E7B /* User.swift */; };
 /* End PBXBuildFile section */
@@ -98,7 +98,7 @@
 		75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
 		75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleStaffTableViewCell.swift; sourceTree = "<group>"; };
 		75E8D9B61C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleStudentTableViewCell.swift; sourceTree = "<group>"; };
-		75E8D9B81C0BA2B1009B5E7B /* PeopleGroupViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleGroupViewCell.swift; sourceTree = "<group>"; };
+		75E8D9B81C0BA2B1009B5E7B /* PeopleGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleGroupTableViewCell.swift; sourceTree = "<group>"; };
 		75E8D9BB1C0BAFE0009B5E7B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75E8D9BC1C0BAFE0009B5E7B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,7 +262,7 @@
 			children = (
 				75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */,
 				75E8D9B61C0BA2A2009B5E7B /* PeopleStudentTableViewCell.swift */,
-				75E8D9B81C0BA2B1009B5E7B /* PeopleGroupViewCell.swift */,
+				75E8D9B81C0BA2B1009B5E7B /* PeopleGroupTableViewCell.swift */,
 				75D1DB5C1C15A005005B9BC2 /* CalendarEventCell.swift */,
 				7506C77E1C17A3B500EEF92D /* PeopleUserTableViewCell.swift */,
 			);
@@ -451,7 +451,7 @@
 				750B2BA81C0CE50700945A91 /* G2SClient.swift in Sources */,
 				750B2BA61C0CCC1500945A91 /* PersonStaffTableViewController.swift in Sources */,
 				75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */,
-				75E8D9B91C0BA2B1009B5E7B /* PeopleGroupViewCell.swift in Sources */,
+				75E8D9B91C0BA2B1009B5E7B /* PeopleGroupTableViewCell.swift in Sources */,
 				75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */,
 				75D1DB5D1C15A005005B9BC2 /* CalendarEventCell.swift in Sources */,
 				75E8D9BE1C0BAFE0009B5E7B /* User.swift in Sources */,

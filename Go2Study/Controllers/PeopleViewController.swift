@@ -48,7 +48,7 @@ class PeopleViewController: UIViewController {
         tableView.delegate = self
         tableView.registerClass(PeopleStaffTableViewCell.self, forCellReuseIdentifier: "PeopleStaffCell")
         tableView.registerClass(PeopleStudentTableViewCell.self, forCellReuseIdentifier: "PeopleStudentCell")
-        tableView.registerClass(PeopleGroupViewCell.self, forCellReuseIdentifier: "PeopleGroupCell")
+        tableView.registerClass(PeopleGroupTableViewCell.self, forCellReuseIdentifier: "PeopleGroupCell")
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -181,10 +181,13 @@ extension PeopleViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         case .Groups:
-            break
+            let cell = tableView.dequeueReusableCellWithIdentifier("PeopleGroupCell") as! PeopleGroupTableViewCell
+            if let group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as? Group {
+                cell.configure(group)
+            }
+            cell.accessoryType = .DisclosureIndicator
+            return cell
         }
-        
-        return UITableViewCell()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

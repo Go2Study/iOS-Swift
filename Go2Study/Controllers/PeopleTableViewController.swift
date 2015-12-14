@@ -131,7 +131,7 @@ class PeopleTableViewController: UITableViewController {
             return cell
             
         case .Groups:
-            let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell", forIndexPath: indexPath) as! PeopleGroupViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("peopleGroupCell", forIndexPath: indexPath) as! PeopleGroupTableViewCell
             let group = groupsFetchedResultsController.objectAtIndexPath(indexPath) as! Group
             cell.configure(group)
             return cell
