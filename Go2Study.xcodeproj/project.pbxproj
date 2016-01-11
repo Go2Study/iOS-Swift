@@ -13,6 +13,7 @@
 		750B2BAA1C0CFF9900945A91 /* PersonStudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */; };
 		7546D7741C0ECC3100B4DB98 /* GroupCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546D7731C0ECC3100B4DB98 /* GroupCreateViewController.swift */; };
 		7546D7761C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546D7751C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift */; };
+		75B346AD1C44115F00C5E675 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B346AC1C44115F00C5E675 /* UIColor.swift */; };
 		75B3A8271C0D355A007B02FE /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */; };
 		75B3A8281C0D355A007B02FE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B3A8261C0D355A007B02FE /* Group.swift */; };
 		75D1DB5B1C158509005B9BC2 /* CalendarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D1DB5A1C158509005B9BC2 /* CalendarTableViewController.m */; };
@@ -27,7 +28,7 @@
 		75DF54211C0F6604004DC8A7 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF54201C0F6604004DC8A7 /* GroupTableViewController.swift */; };
 		75DF54231C0F6633004DC8A7 /* GroupMembersListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF54221C0F6633004DC8A7 /* GroupMembersListTableViewController.swift */; };
 		75DF54261C0F6D94004DC8A7 /* People.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75DF54241C0F6D94004DC8A7 /* People.storyboard */; };
-		75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */; };
+		75E8D9AC1C0B9348009B5E7B /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AB1C0B9348009B5E7B /* WelcomeViewController.swift */; };
 		75E8D9AF1C0B943B009B5E7B /* FontysClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */; };
 		75E8D9B11C0B9ECB009B5E7B /* PeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */; };
 		75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */; };
@@ -61,6 +62,7 @@
 		750B2BA91C0CFF9900945A91 /* PersonStudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonStudentTableViewController.swift; sourceTree = "<group>"; };
 		7546D7731C0ECC3100B4DB98 /* GroupCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreateViewController.swift; sourceTree = "<group>"; };
 		7546D7751C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreateMembersTableViewController.swift; sourceTree = "<group>"; };
+		75B346AC1C44115F00C5E675 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		75B3A8251C0D355A007B02FE /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75B3A8261C0D355A007B02FE /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		75D1DB581C158508005B9BC2 /* Go2Study-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Go2Study-Bridging-Header.h"; path = "Controllers/Go2Study-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		75DF54201C0F6604004DC8A7 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		75DF54221C0F6633004DC8A7 /* GroupMembersListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMembersListTableViewController.swift; sourceTree = "<group>"; };
 		75DF54251C0F6D94004DC8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/People.storyboard; sourceTree = "<group>"; };
-		75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysOAuthViewController.swift; sourceTree = "<group>"; };
+		75E8D9AB1C0B9348009B5E7B /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		75E8D9AE1C0B943B009B5E7B /* FontysClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontysClient.swift; sourceTree = "<group>"; };
 		75E8D9B01C0B9ECB009B5E7B /* PeopleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewController.swift; sourceTree = "<group>"; };
 		75E8D9B41C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleStaffTableViewCell.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75B346AB1C44112B00C5E675 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				75B346AC1C44115F00C5E675 /* UIColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		75D1DB551C1509D1005B9BC2 /* People */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +146,7 @@
 		75D1DB561C1509E1005B9BC2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				75E8D9AB1C0B9348009B5E7B /* FontysOAuthViewController.swift */,
+				75E8D9AB1C0B9348009B5E7B /* WelcomeViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -175,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				75E8D9AA1C0B92AB009B5E7B /* Controllers */,
+				75B346AB1C44112B00C5E675 /* Extensions */,
 				75E8D9BA1C0BAFB4009B5E7B /* Models */,
 				75E8D9AD1C0B941B009B5E7B /* Services */,
 				75E8D9B31C0B9F5F009B5E7B /* Views */,
@@ -405,10 +416,11 @@
 				75DF363F1C0B91F500A9B5E6 /* Go2Study.xcdatamodeld in Sources */,
 				75DF54231C0F6633004DC8A7 /* GroupMembersListTableViewController.swift in Sources */,
 				750B2BAA1C0CFF9900945A91 /* PersonStudentTableViewController.swift in Sources */,
-				75E8D9AC1C0B9348009B5E7B /* FontysOAuthViewController.swift in Sources */,
+				75E8D9AC1C0B9348009B5E7B /* WelcomeViewController.swift in Sources */,
 				75B3A8281C0D355A007B02FE /* Group.swift in Sources */,
 				75DF36371C0B91F500A9B5E6 /* AppDelegate.swift in Sources */,
 				7546D7741C0ECC3100B4DB98 /* GroupCreateViewController.swift in Sources */,
+				75B346AD1C44115F00C5E675 /* UIColor.swift in Sources */,
 				75E8D9B51C0B9FA1009B5E7B /* PeopleStaffTableViewCell.swift in Sources */,
 				7546D7761C0ECC4500B4DB98 /* GroupCreateMembersTableViewController.swift in Sources */,
 				75D1DB5B1C158509005B9BC2 /* CalendarTableViewController.m in Sources */,

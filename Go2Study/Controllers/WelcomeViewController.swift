@@ -1,5 +1,5 @@
 //
-//  FontysOAuthViewController.swift
+//  WelcomeViewController.swift
 //  Go2Study
 //
 //  Created by Ashish Kumar on 29/11/15.
@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import SwiftyJSON
 
-class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegate {
+class WelcomeViewController: UIViewController, SFSafariViewControllerDelegate {
     
     var fontysClient = FontysClient()
     var g2sClient = G2SClient()
@@ -55,7 +55,7 @@ class FontysOAuthViewController: UIViewController, SFSafariViewControllerDelegat
 
 // MARK: - FontysClientDelegate
 
-extension FontysOAuthViewController: FontysClientDelegate {
+extension WelcomeViewController: FontysClientDelegate {
     
     func fontysClient(client: FontysClient, didFailWithError error: NSError) {
         print("Request error \(error), \(error.userInfo)")
@@ -97,7 +97,7 @@ extension FontysOAuthViewController: FontysClientDelegate {
 
 // MARK: - G2SClientDelegate
 
-extension FontysOAuthViewController: G2SClientDelegate {
+extension WelcomeViewController: G2SClientDelegate {
     
     func g2sClient(client: G2SClient, didFailWithError error: NSError) {
         print("Request error \(error), \(error.userInfo)")
